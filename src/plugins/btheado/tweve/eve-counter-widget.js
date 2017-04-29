@@ -31,20 +31,9 @@ class EveCounterWidget extends Widget {
     // Define the eve counter program
     this.renderCounter(prog);
 
-    prog.bind("Attach the toplevel to the TW widget root", function (_a) {
-      var find = _a.find, record = _a.record;
-      var embed = find("embed");
-      var my_root = find("my-root");
-      return [
-          my_root.add("children", [
-            embed.add({tag: "html/element", tagname: "div"})
-          ])
-      ];
-    });
-
     // addExternalRoot and inputEAVs must come after the program is defined
     // or they won't work
-    htmlWatcher.addExternalRoot("my-root", this.domNode);
+    htmlWatcher.addExternalRoot("tw-widget-root", this.domNode);
     prog.inputEAVs([
       [1, "tag", "counter"], [1, "count", 0],
       [2, "tag", "counter"], [2, "count", 0],
@@ -71,9 +60,10 @@ class EveCounterWidget extends Widget {
     prog.bind("Display a Counter", function(_a) {
       var find = _a.find, record = _a.record;
       var counter = find("counter");
+      var root = find("tw-widget-root");
 
       return [
-        record("embed").add("children", [
+        root.add("children", [
           record("html/element", { tagname: "div", counter: counter, style: record({flex: "0 0 auto", width: "80px", display: "flex", "flex-direction": "row"})}).add("children", [
             record("html/element", { tagname: "button", text: "-", diff: -1, sort: 0, counter: counter }),
             record("html/element", { tagname: "div", text: counter.count, sort: 1, counter: counter, style: record({padding: "0 6px", flex: 1})}),
