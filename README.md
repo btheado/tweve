@@ -1,4 +1,4 @@
-This TiddlyWiki plugin embeds a sample [Eve](https://github.com/witheve/Eve) program into a [Tiddlywiki](http://tiddlywiki.com) widget.
+This TiddlyWiki plugin embeds a sample [Eve](https://github.com/witheve/Eve) program into a [Tiddlywiki](http://tiddlywiki.com) widget.  See https://btheado.github.io/tweve/ for a demo.
 
 ---
 
