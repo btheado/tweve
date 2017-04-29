@@ -1,0 +1,9 @@
+{
+  "title": "$:/plugins/btheado/tweve",
+  "description": "Eve plugin for Tiddlywiki",
+  "author": "Brian Theado",
+  "core-version": ">=5.1.13",
+  "list": "readme",
+  "version": "0.1.0+82",
+  "released": "Tue, 18 Apr 2017 02:45:44 GMT"
+}

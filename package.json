@@ -1,0 +1,38 @@
+{
+  "name": "tweve",
+  "version": "0.1.0",
+  "author": "Brian Theado <brian.theado@gmail.com>",
+  "description": "Eve plugin for Tiddlywiki",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/btheado/tweve"
+  },
+  "bugs": {
+    "url": "https://github.com/btheado/tweve/issues"
+  },
+  "keywords": [
+    "tiddlywiki",
+    "tw5",
+    "wiki",
+    "browser"
+  ],
+  "dependencies": {
+    "witheve": "preview"
+  },
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "cross-env": "^4.0.0",
+    "semver": "^5.1.0",
+    "tiddlywiki": "^5.1.*",
+    "webpack": "^2.4.1"
+  },
+  "scripts": {
+    "build": "webpack && cpx src/plugins/**/*.{plugin,info,tid,files} dist",
+    "build:production": "webpack -p",
+    "build:index": "npm run tw -- --build index",
+    "tw": "cross-env TIDDLYWIKI_PLUGIN_PATH=./dist tiddlywiki ./wiki --verbose",
+    "tw_start": "npm run tw -- --server 8087 $:/core/save/all text/plain text/html '' '' 0.0.0.0"
+  }
+}

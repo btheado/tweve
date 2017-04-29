@@ -1,0 +1,22 @@
+created: 20170428225647467
+creator: 0.0.0.0
+modified: 20170429173526794
+modifier: 0.0.0.0
+tags: 
+title: Eve tiddlywiki plugin
+type: text/vnd.tiddlywiki
+
+This plugin embeds a sample [[Eve|https://github.com/witheve/Eve]] program into a [[Tiddlywiki|http://tiddlywiki.com]] widget.
+
+This sample program is similar to the one found at http://play.witheve.com/#/examples/counter.eve, except it is written using the [[Javascript DSL|https://github.com/witheve/docs/blob/master/guides/dsl.md]] instead of the Eve syntax.
+
+The widget is exposed with the name ``evecounter`` and the syntax for creating an instance of the widget is:
+
+```
+ <$evecounter/>
+```
+
+The widget looks like this and the counters can be incremented an decremented using the buttons:
+ <$evecounter/>
+
+Currently, the state of the widget is not being saved anywhere, so anytime this tiddler gets refreshed (i.e. close and open the tiddler among many other possibilities), the counters will reset to zero.

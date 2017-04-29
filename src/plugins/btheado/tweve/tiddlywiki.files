@@ -1,0 +1,14 @@
+{
+  "tiddlers": [
+    {
+      "file": "eve-counter-widget.js",
+      "prefix": "if($tw.browser){\n",
+      "suffix": "\n}",
+      "fields": {
+        "type": "application/javascript",
+        "title": "$:/plugins/btheado/eve/eve-counter-widget.js",
+        "module-type": "widget"
+      }
+    }
+  ]
+}
