@@ -130,8 +130,6 @@ Error message and password prompt
 
 <li>$:/plugins/tiddlywiki/filesystem</li>
 
-<li>$:/plugins/tiddlywiki/tiddlyweb</li>
-
 <li>$:/SiteTitle</li>
 
 <li>$:/StoryList</li>
@@ -152,7 +150,7 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
-<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWiki5 core" list="readme" plugin-priority="0" plugin-type="plugin" title="$:/core" type="application/json" version="5.1.14" revision="0" bag="default">
+<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWiki5 core" list="readme" plugin-priority="0" plugin-type="plugin" title="$:/core" type="application/json" version="5.1.14">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/Acknowledgements&quot;: {
@@ -8349,14 +8347,14 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20170428230350560" creator="0.0.0.0" modified="20170429174318460" modifier="0.0.0.0" title="$:/DefaultTiddlers" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20170428230350560" creator="0.0.0.0" modified="20170429174318460" modifier="0.0.0.0" title="$:/DefaultTiddlers" type="text/vnd.tiddlywiki">
 <pre>[[Eve tiddlywiki plugin]]
 </pre>
 </div>
-<div title="$:/isEncrypted" revision="0" bag="default">
+<div title="$:/isEncrypted">
 <pre>no</pre>
 </div>
-<div author="Brian Theado" core-version="&gt;=5.1.13" dependents="" description="Eve plugin for Tiddlywiki" list="readme" plugin-type="plugin" released="Tue, 18 Apr 2017 02:45:44 GMT" title="$:/plugins/btheado/tweve" type="application/json" version="0.1.0+82" revision="0" bag="default">
+<div author="Brian Theado" core-version="&gt;=5.1.13" dependents="" description="Eve plugin for Tiddlywiki" list="readme" plugin-type="plugin" released="Tue, 18 Apr 2017 02:45:44 GMT" title="$:/plugins/btheado/tweve" type="application/json" version="0.1.0+82">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/plugins/btheado/eve/eve-counter-widget.js&quot;: {
@@ -8368,7 +8366,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="Local filesystem syncadaptor" list="readme" plugin-type="plugin" title="$:/plugins/tiddlywiki/filesystem" type="application/json" version="5.1.14" revision="0" bag="default">
+<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="Local filesystem syncadaptor" list="readme" plugin-type="plugin" title="$:/plugins/tiddlywiki/filesystem" type="application/json" version="5.1.14">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/plugins/tiddlywiki/filesystem/filesystemadaptor.js&quot;: {
@@ -8384,53 +8382,13 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWeb and TiddlySpace components" list="readme" plugin-type="plugin" title="$:/plugins/tiddlywiki/tiddlyweb" type="application/json" version="5.1.14" revision="0" bag="default">
-<pre>{
-    &quot;tiddlers&quot;: {
-        &quot;GettingStarted&quot;: {
-            &quot;title&quot;: &quot;GettingStarted&quot;,
-            &quot;tags&quot;: &quot;$:/tags/GettingStarted&quot;,
-            &quot;caption&quot;: &quot;Step 1&lt;br&gt;Syncing&quot;,
-            &quot;text&quot;: &quot;Welcome to ~TiddlyWiki and the ~TiddlyWiki community\n\nVisit http://tiddlywiki.com/ to find out more about ~TiddlyWiki and what it can do.\n\n! Syncing Changes to the Server\n\nBefore you can start storing important information in ~TiddlyWiki it is important to make sure that your changes are being reliably saved by the server.\n\n# Create a new tiddler using the {{$:/core/images/new-button}} button in the sidebar on the right\n# Click the {{$:/core/images/done-button}} button at the top right of the new tiddler\n# Check the ~TiddlyWiki command line for a message confirming the tiddler has been saved\n# Refresh the page in the browser to and verify that the new tiddler has been correctly saved\n&quot;
-        },
-        &quot;$:/config/SaveWikiButton/Template&quot;: {
-            &quot;title&quot;: &quot;$:/config/SaveWikiButton/Template&quot;,
-            &quot;text&quot;: &quot;$:/plugins/tiddlywiki/tiddlyweb/save/offline&quot;
-        },
-        &quot;$:/plugins/tiddlywiki/tiddlyweb/ServerControlPanel&quot;: {
-            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/tiddlyweb/ServerControlPanel&quot;,
-            &quot;caption&quot;: &quot;Server&quot;,
-            &quot;tags&quot;: &quot;$:/tags/ControlPanel&quot;,
-            &quot;text&quot;: &quot;&lt;$reveal state=\&quot;$:/status/IsLoggedIn\&quot; type=\&quot;nomatch\&quot; text=\&quot;yes\&quot;&gt;\nLog in to ~TiddlyWeb: &lt;$button message=\&quot;tm-login\&quot;&gt;Login&lt;/$button&gt;\n&lt;/$reveal&gt;\n&lt;$reveal state=\&quot;$:/status/IsLoggedIn\&quot; type=\&quot;match\&quot; text=\&quot;yes\&quot;&gt;\nLogged in as {{$:/status/UserName}} &lt;$button message=\&quot;tm-logout\&quot;&gt;Logout&lt;/$button&gt;\n&lt;/$reveal&gt;\n\n----\n\nHost configuration: &lt;$edit-text tiddler=\&quot;$:/config/tiddlyweb/host\&quot; tag=\&quot;input\&quot; default=\&quot;\&quot;/&gt;\n\n&lt;blockquote&gt;//for example, `$protocol$//$host$/folder`, where `$protocol$` is replaced by the protocol (typically `http` or `https`), and `$host$` by the host name//&lt;/blockquote&gt;\n\n----\n\n&lt;$button message=\&quot;tm-server-refresh\&quot;&gt;Refresh&lt;/$button&gt; to fetch changes from the server immediately\n&quot;
-        },
-        &quot;$:/core/templates/html-div-tiddler&quot;: {
-            &quot;title&quot;: &quot;$:/core/templates/html-div-tiddler&quot;,
-            &quot;text&quot;: &quot;&lt;!--\n\nThis template is used for saving tiddlers as an HTML DIV tag with attributes representing the tiddler fields. This version includes the tiddler changecount as the field `revision`.\n\n--&gt;`&lt;div`&lt;$fields exclude='text revision bag' template=' $name$=\&quot;$encoded_value$\&quot;'&gt;&lt;/$fields&gt;` revision=\&quot;`&lt;&lt;changecount&gt;&gt;`\&quot; bag=\&quot;default\&quot;&gt;\n&lt;pre&gt;`&lt;$view field=\&quot;text\&quot; format=\&quot;htmlencoded\&quot; /&gt;`&lt;/pre&gt;\n&lt;/div&gt;`\n&quot;
-        },
-        &quot;$:/plugins/tiddlywiki/tiddlyweb/readme&quot;: {
-            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/tiddlyweb/readme&quot;,
-            &quot;text&quot;: &quot;This plugin runs in the browser to synchronise tiddler changes to and from a TiddlyWeb-compatible server (including TiddlyWiki 5 itself, running on Node.js). It is inert when run under Node.js. Disabling this plugin via the browser can not be undone via the browser since this plugin provides the mechanism to synchronize settings with the server.\n\n[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/tiddlyweb]]\n&quot;
-        },
-        &quot;$:/plugins/tiddlywiki/tiddlyweb/save/offline&quot;: {
-            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/tiddlyweb/save/offline&quot;,
-            &quot;text&quot;: &quot;\\define saveTiddlerFilter()\n[is[tiddler]] -[[$:/boot/boot.css]] -[[$:/HistoryList]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/plugins/tiddlywiki/filesystem]] -[[$:/plugins/tiddlywiki/tiddlyweb]] +[sort[title]] $(publishFilter)$\n\\end\n{{$:/core/templates/tiddlywiki5.html}}\n&quot;
-        },
-        &quot;$:/plugins/tiddlywiki/tiddlyweb/tiddlywebadaptor.js&quot;: {
-            &quot;text&quot;: &quot;/*\\\ntitle: $:/plugins/tiddlywiki/tiddlyweb/tiddlywebadaptor.js\ntype: application/javascript\nmodule-type: syncadaptor\n\nA sync adaptor module for synchronising with TiddlyWeb compatible servers\n\n\\*/\n(function(){\n\n/*jslint node: true, browser: true */\n/*global $tw: false */\n\&quot;use strict\&quot;;\n\nvar CONFIG_HOST_TIDDLER = \&quot;$:/config/tiddlyweb/host\&quot;,\n\tDEFAULT_HOST_TIDDLER = \&quot;$protocol$//$host$/\&quot;;\n\nfunction TiddlyWebAdaptor(options) {\n\tthis.wiki = options.wiki;\n\tthis.host = this.getHost();\n\tthis.recipe = undefined;\n\tthis.hasStatus = false;\n\tthis.logger = new $tw.utils.Logger(\&quot;TiddlyWebAdaptor\&quot;);\n}\n\nTiddlyWebAdaptor.prototype.name = \&quot;tiddlyweb\&quot;;\n\nTiddlyWebAdaptor.prototype.isReady = function() {\n\treturn this.hasStatus;\n};\n\nTiddlyWebAdaptor.prototype.getHost = function() {\n\tvar text = this.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),\n\t\tsubstitutions = [\n\t\t\t{name: \&quot;protocol\&quot;, value: document.location.protocol},\n\t\t\t{name: \&quot;host\&quot;, value: document.location.host}\n\t\t];\n\tfor(var t=0; t&lt;substitutions.length; t++) {\n\t\tvar s = substitutions[t];\n\t\ttext = $tw.utils.replaceString(text,new RegExp(\&quot;\\\\$\&quot; + s.name + \&quot;\\\\$\&quot;,\&quot;mg\&quot;),s.value);\n\t}\n\treturn text;\n};\n\nTiddlyWebAdaptor.prototype.getTiddlerInfo = function(tiddler) {\n\treturn {\n\t\tbag: tiddler.fields.bag\n\t};\n};\n\n/*\nGet the current status of the TiddlyWeb connection\n*/\nTiddlyWebAdaptor.prototype.getStatus = function(callback) {\n\t// Get status\n\tvar self = this;\n\tthis.logger.log(\&quot;Getting status\&quot;);\n\t$tw.utils.httpRequest({\n\t\turl: this.host + \&quot;status\&quot;,\n\t\tcallback: function(err,data) {\n\t\t\tself.hasStatus = true;\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\t// Decode the status JSON\n\t\t\tvar json = null,\n\t\t\t\tisLoggedIn = false;\n\t\t\ttry {\n\t\t\t\tjson = JSON.parse(data);\n\t\t\t} catch (e) {\n\t\t\t}\n\t\t\tif(json) {\n\t\t\t\tself.logger.log(\&quot;Status:\&quot;,data);\n\t\t\t\t// Record the recipe\n\t\t\t\tif(json.space) {\n\t\t\t\t\tself.recipe = json.space.recipe;\n\t\t\t\t}\n\t\t\t\t// Check if we're logged in\n\t\t\t\tisLoggedIn = json.username !== \&quot;GUEST\&quot;;\n\t\t\t}\n\t\t\t// Invoke the callback if present\n\t\t\tif(callback) {\n\t\t\t\tcallback(null,isLoggedIn,json.username);\n\t\t\t}\n\t\t}\n\t});\n};\n\n/*\nAttempt to login and invoke the callback(err)\n*/\nTiddlyWebAdaptor.prototype.login = function(username,password,callback) {\n\tvar options = {\n\t\turl: this.host + \&quot;challenge/tiddlywebplugins.tiddlyspace.cookie_form\&quot;,\n\t\ttype: \&quot;POST\&quot;,\n\t\tdata: {\n\t\t\tuser: username,\n\t\t\tpassword: password,\n\t\t\ttiddlyweb_redirect: \&quot;/status\&quot; // workaround to marginalize automatic subsequent GET\n\t\t},\n\t\tcallback: function(err) {\n\t\t\tcallback(err);\n\t\t}\n\t};\n\tthis.logger.log(\&quot;Logging in:\&quot;,options);\n\t$tw.utils.httpRequest(options);\n};\n\n/*\n*/\nTiddlyWebAdaptor.prototype.logout = function(callback) {\n\tvar options = {\n\t\turl: this.host + \&quot;logout\&quot;,\n\t\ttype: \&quot;POST\&quot;,\n\t\tdata: {\n\t\t\tcsrf_token: this.getCsrfToken(),\n\t\t\ttiddlyweb_redirect: \&quot;/status\&quot; // workaround to marginalize automatic subsequent GET\n\t\t},\n\t\tcallback: function(err,data) {\n\t\t\tcallback(err);\n\t\t}\n\t};\n\tthis.logger.log(\&quot;Logging out:\&quot;,options);\n\t$tw.utils.httpRequest(options);\n};\n\n/*\nRetrieve the CSRF token from its cookie\n*/\nTiddlyWebAdaptor.prototype.getCsrfToken = function() {\n\tvar regex = /^(?:.*; )?csrf_token=([^(;|$)]*)(?:;|$)/,\n\t\tmatch = regex.exec(document.cookie),\n\t\tcsrf = null;\n\tif (match &amp;&amp; (match.length === 2)) {\n\t\tcsrf = match[1];\n\t}\n\treturn csrf;\n};\n\n/*\nGet an array of skinny tiddler fields from the server\n*/\nTiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {\n\tvar self = this;\n\t$tw.utils.httpRequest({\n\t\turl: this.host + \&quot;recipes/\&quot; + this.recipe + \&quot;/tiddlers.json\&quot;,\n\t\tcallback: function(err,data) {\n\t\t\t// Check for errors\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\t// Process the tiddlers to make sure the revision is a string\n\t\t\tvar tiddlers = JSON.parse(data);\n\t\t\tfor(var t=0; t&lt;tiddlers.length; t++) {\n\t\t\t\ttiddlers[t] = self.convertTiddlerFromTiddlyWebFormat(tiddlers[t]);\n\t\t\t}\n\t\t\t// Invoke the callback with the skinny tiddlers\n\t\t\tcallback(null,tiddlers);\n\t\t}\n\t});\n};\n\n/*\nSave a tiddler and invoke the callback with (err,adaptorInfo,revision)\n*/\nTiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {\n\tvar self = this;\n\t$tw.utils.httpRequest({\n\t\turl: this.host + \&quot;recipes/\&quot; + encodeURIComponent(this.recipe) + \&quot;/tiddlers/\&quot; + encodeURIComponent(tiddler.fields.title),\n\t\ttype: \&quot;PUT\&quot;,\n\t\theaders: {\n\t\t\t\&quot;Content-type\&quot;: \&quot;application/json\&quot;\n\t\t},\n\t\tdata: this.convertTiddlerToTiddlyWebFormat(tiddler),\n\t\tcallback: function(err,data,request) {\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\t// Save the details of the new revision of the tiddler\n\t\t\tvar etagInfo = self.parseEtag(request.getResponseHeader(\&quot;Etag\&quot;));\n\t\t\t// Invoke the callback\n\t\t\tcallback(null,{\n\t\t\t\tbag: etagInfo.bag\n\t\t\t}, etagInfo.revision);\n\t\t}\n\t});\n};\n\n/*\nLoad a tiddler and invoke the callback with (err,tiddlerFields)\n*/\nTiddlyWebAdaptor.prototype.loadTiddler = function(title,callback) {\n\tvar self = this;\n\t$tw.utils.httpRequest({\n\t\turl: this.host + \&quot;recipes/\&quot; + encodeURIComponent(this.recipe) + \&quot;/tiddlers/\&quot; + encodeURIComponent(title),\n\t\tcallback: function(err,data,request) {\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\t// Invoke the callback\n\t\t\tcallback(null,self.convertTiddlerFromTiddlyWebFormat(JSON.parse(data)));\n\t\t}\n\t});\n};\n\n/*\nDelete a tiddler and invoke the callback with (err)\noptions include:\ntiddlerInfo: the syncer's tiddlerInfo for this tiddler\n*/\nTiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {\n\tvar self = this,\n\t\tbag = options.tiddlerInfo.adaptorInfo.bag;\n\t// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it\n\tif(!bag) {\n\t\treturn callback(null);\n\t}\n\t// Issue HTTP request to delete the tiddler\n\t$tw.utils.httpRequest({\n\t\turl: this.host + \&quot;bags/\&quot; + encodeURIComponent(bag) + \&quot;/tiddlers/\&quot; + encodeURIComponent(title),\n\t\ttype: \&quot;DELETE\&quot;,\n\t\tcallback: function(err,data,request) {\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\t// Invoke the callback\n\t\t\tcallback(null);\n\t\t}\n\t});\n};\n\n/*\nConvert a tiddler to a field set suitable for PUTting to TiddlyWeb\n*/\nTiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {\n\tvar result = {},\n\t\tknownFields = [\n\t\t\t\&quot;bag\&quot;, \&quot;created\&quot;, \&quot;creator\&quot;, \&quot;modified\&quot;, \&quot;modifier\&quot;, \&quot;permissions\&quot;, \&quot;recipe\&quot;, \&quot;revision\&quot;, \&quot;tags\&quot;, \&quot;text\&quot;, \&quot;title\&quot;, \&quot;type\&quot;, \&quot;uri\&quot;\n\t\t];\n\tif(tiddler) {\n\t\t$tw.utils.each(tiddler.fields,function(fieldValue,fieldName) {\n\t\t\tvar fieldString = fieldName === \&quot;tags\&quot; ?\n\t\t\t\t\t\t\t\ttiddler.fields.tags :\n\t\t\t\t\t\t\t\ttiddler.getFieldString(fieldName); // Tags must be passed as an array, not a string\n\n\t\t\tif(knownFields.indexOf(fieldName) !== -1) {\n\t\t\t\t// If it's a known field, just copy it across\n\t\t\t\tresult[fieldName] = fieldString;\n\t\t\t} else {\n\t\t\t\t// If it's unknown, put it in the \&quot;fields\&quot; field\n\t\t\t\tresult.fields = result.fields || {};\n\t\t\t\tresult.fields[fieldName] = fieldString;\n\t\t\t}\n\t\t});\n\t}\n\t// Default the content type\n\tresult.type = result.type || \&quot;text/vnd.tiddlywiki\&quot;;\n\treturn JSON.stringify(result,null,$tw.config.preferences.jsonSpaces);\n};\n\n/*\nConvert a field set in TiddlyWeb format into ordinary TiddlyWiki5 format\n*/\nTiddlyWebAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(tiddlerFields) {\n\tvar self = this,\n\t\tresult = {};\n\t// Transfer the fields, pulling down the `fields` hashmap\n\t$tw.utils.each(tiddlerFields,function(element,title,object) {\n\t\tif(title === \&quot;fields\&quot;) {\n\t\t\t$tw.utils.each(element,function(element,subTitle,object) {\n\t\t\t\tresult[subTitle] = element;\n\t\t\t});\n\t\t} else {\n\t\t\tresult[title] = tiddlerFields[title];\n\t\t}\n\t});\n\t// Make sure the revision is expressed as a string\n\tif(typeof result.revision === \&quot;number\&quot;) {\n\t\tresult.revision = result.revision.toString();\n\t}\n\t// Some unholy freaking of content types\n\tif(result.type === \&quot;text/javascript\&quot;) {\n\t\tresult.type = \&quot;application/javascript\&quot;;\n\t} else if(!result.type || result.type === \&quot;None\&quot;) {\n\t\tresult.type = \&quot;text/x-tiddlywiki\&quot;;\n\t}\n\treturn result;\n};\n\n/*\nSplit a TiddlyWeb Etag into its constituent parts. For example:\n\n```\n\&quot;system-images_public/unsyncedIcon/946151:9f11c278ccde3a3149f339f4a1db80dd4369fc04\&quot;\n```\n\nNote that the value includes the opening and closing double quotes.\n\nThe parts are:\n\n```\n&lt;bag&gt;/&lt;title&gt;/&lt;revision&gt;:&lt;hash&gt;\n```\n*/\nTiddlyWebAdaptor.prototype.parseEtag = function(etag) {\n\tvar firstSlash = etag.indexOf(\&quot;/\&quot;),\n\t\tlastSlash = etag.lastIndexOf(\&quot;/\&quot;),\n\t\tcolon = etag.lastIndexOf(\&quot;:\&quot;);\n\tif(firstSlash === -1 || lastSlash === -1 || colon === -1) {\n\t\treturn null;\n\t} else {\n\t\treturn {\n\t\t\tbag: decodeURIComponent(etag.substring(1,firstSlash)),\n\t\t\ttitle: decodeURIComponent(etag.substring(firstSlash + 1,lastSlash)),\n\t\t\trevision: etag.substring(lastSlash + 1,colon)\n\t\t};\n\t}\n};\n\nif($tw.browser &amp;&amp; document.location.protocol.substr(0,4) === \&quot;http\&quot; ) {\n\texports.adaptorClass = TiddlyWebAdaptor;\n}\n\n})();\n&quot;,
-            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/tiddlyweb/tiddlywebadaptor.js&quot;,
-            &quot;type&quot;: &quot;application/javascript&quot;,
-            &quot;module-type&quot;: &quot;syncadaptor&quot;
-        }
-    }
-}</pre>
-</div>
-<div created="20170429173555930" creator="0.0.0.0" modified="20170429173648745" modifier="0.0.0.0" title="$:/SiteTitle" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20170429173555930" creator="0.0.0.0" modified="20170429173648745" modifier="0.0.0.0" title="$:/SiteTitle" type="text/vnd.tiddlywiki">
 <pre>Eve Embedded in ~TiddlyWiki</pre>
 </div>
-<div list="[[Eve tiddlywiki plugin]]" title="$:/StoryList" revision="1" bag="default">
+<div list="[[Eve tiddlywiki plugin]]" title="$:/StoryList">
 <pre></pre>
 </div>
-<div plugin-type="info" title="$:/temp/info-plugin" type="application/json" revision="0" bag="default">
+<div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/info/browser&quot;: {
@@ -8444,7 +8402,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="Basic theme" name="Vanilla" plugin-type="theme" title="$:/themes/tiddlywiki/vanilla" type="application/json" version="5.1.14" revision="0" bag="default">
+<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="Basic theme" name="Vanilla" plugin-type="theme" title="$:/themes/tiddlywiki/vanilla" type="application/json" version="5.1.14">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/themes/tiddlywiki/vanilla/themetweaks&quot;: {
@@ -8542,7 +8500,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20170428225647467" creator="0.0.0.0" modified="20170429185057098" modifier="0.0.0.0" tags="" title="Eve tiddlywiki plugin" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20170428225647467" creator="0.0.0.0" modified="20170429185057098" modifier="0.0.0.0" tags="" title="Eve tiddlywiki plugin" type="text/vnd.tiddlywiki">
 <pre>This plugin embeds a sample [[Eve|https://github.com/witheve/Eve]] program into a [[Tiddlywiki|http://tiddlywiki.com]] widget.
 
 This sample program is similar to the one found at http://play.witheve.com/#/examples/counter.eve, except it is written using the [[Javascript DSL|https://github.com/witheve/docs/blob/master/guides/dsl.md]] instead of the Eve syntax.
