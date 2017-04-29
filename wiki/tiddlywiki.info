@@ -1,7 +1,6 @@
 {
   "plugins": [
     "tiddlywiki/filesystem",
-    "tiddlywiki/tiddlyweb",
     "btheado/tweve"
 ],
   "themes": [
