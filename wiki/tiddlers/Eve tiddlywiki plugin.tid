@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170429173526794
+modified: 20170429185057098
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -16,7 +16,7 @@ The widget is exposed with the name ``evecounter`` and the syntax for creating a
  <$evecounter/>
 ```
 
-The widget looks like this and the counters can be incremented an decremented using the buttons:
+The widget looks like this and the counters can be incremented and decremented using the buttons:
  <$evecounter/>
 
 Currently, the state of the widget is not being saved anywhere, so anytime this tiddler gets refreshed (i.e. close and open the tiddler among many other possibilities), the counters will reset to zero.
