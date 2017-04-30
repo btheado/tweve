@@ -11,6 +11,23 @@ module.exports = {
     path: path.resolve(__dirname, './dist/btheado/tweve'),
     filename: 'eve-counter-widget.js'
   },
+
+  // Convert the javascript using babel
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env']
+          }
+        }
+      }
+    ]
+  },
+
   externals: {
     // This will be provided by TiddlyWiki, so tell webpack not to look for it
     '$:/core/modules/widgets/widget.js': {commonjs: '$:/core/modules/widgets/widget.js'}
