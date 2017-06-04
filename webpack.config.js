@@ -3,13 +3,13 @@ const path = require('path');
 const indexHtml = path.join(__dirname, "index.html");
 module.exports = {
   entry: [
-    './src/plugins/btheado/tweve/eve-counter-widget.js',
+    './src/plugins/btheado/tweve/eve-widget.js',
   ],
   output: {
     libraryTarget: 'commonjs', // without this: https://stackoverflow.com/questions/42910956/issue-with-using-externals
                                // Also without this, tw can't load the widget: "Cannot read property 'widget' of undefined"
     path: path.resolve(__dirname, './dist/btheado/tweve'),
-    filename: 'eve-counter-widget.js'
+    filename: 'eve-widget.js'
   },
 
   // Convert the javascript using babel

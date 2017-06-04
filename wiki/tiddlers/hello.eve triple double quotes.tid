@@ -1,0 +1,16 @@
+created: 20170604121123086
+creator: 0.0.0.0
+modified: 20170604123349662
+modifier: 0.0.0.0
+tags: 
+title: hello.eve triple double quotes
+type: text/vnd.tiddlywiki
+
+<$eve markdown="""
+```
+search
+    root = [#tw-widget-root]
+commit
+    root.children += [#ui/div text: "hello using triple double quotes"]
+```
+"""/>

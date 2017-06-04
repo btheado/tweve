@@ -1,22 +1,68 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170429185057098
+modified: 20170604134100231
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
 type: text/vnd.tiddlywiki
 
-This plugin embeds a sample [[Eve|https://github.com/witheve/Eve]] program into a [[Tiddlywiki|http://tiddlywiki.com]] widget.
+This plugin implements a [[Tiddlywiki|http://tiddlywiki.com]] widget which allows an [[Eve|https://github.com/witheve/Eve]] program to be embedded.
 
-This sample program is similar to the one found at http://play.witheve.com/#/examples/counter.eve, except it is written using the [[Javascript DSL|https://github.com/witheve/docs/blob/master/guides/dsl.md]] instead of the Eve syntax.
+The widget is exposed with the name ``eve``. Eve code is passed into the widget using the ``markdown`` attribute. Tiddlywiki widget [[attributes|http://tiddlywiki.com/static/Widgets%2520in%2520WikiText.html]] can be specified several ways.
 
-The widget is exposed with the name ``evecounter`` and the syntax for creating an instance of the widget is:
+The triple double quotes allow multi-line text to be passed, so the eve program can be specified within the widget call itself:
+
+<pre><code>
+<$view tiddler="hello.eve triple double quotes" format=text/>
+</code></pre>
+
+This renders as:
+
+<<<
+ <$eve markdown={{hello.eve triple double quotes}}/>
+<<<
+
+Another approach is to write the eve code in its own tiddler such as [[hello.eve]] and use the transclusion attribute syntax to pass in the source code:
 
 ```
- <$evecounter/>
+ <$eve markdown={{hello.eve}}/>
 ```
 
-The widget looks like this and the counters can be incremented and decremented using the buttons:
- <$evecounter/>
+This renders as
 
-Currently, the state of the widget is not being saved anywhere, so anytime this tiddler gets refreshed (i.e. close and open the tiddler among many other possibilities), the counters will reset to zero.
+<<<
+ <$eve markdown={{hello.eve}}/>
+<<<
+
+---
+
+Note how the ``#ui/div`` elements in the above examples are placed as children of ``#tw-widget-root``. This is not required in a normal, standalone Eve program. It is only needed in order to get the output to appear in the page where the widget instance is defined.
+
+Currently, the state of the widget is not being saved anywhere, so anytime this tiddler gets refreshed (i.e. close and open the tiddler among many other possibilities), any eve state will be lost. The above examples do not have any state.
+
+---
+
+Another example - [[counter.eve]]
+
+```
+ <$eve markdown={{counter.eve}}/>
+```
+
+This renders as
+
+<<<
+ <$eve markdown={{counter.eve}}/>
+<<<
+
+You can click the `+` and `-` to increment and decrement the counters. As you can see it looks bad because the `#ui` styling is not properly setup
+
+---
+
+Improvements needed:
+
+* `#ui` styling
+* Ability to save Eve state
+* Ability to pass in list of watchers to attach to the Eve program
+* Error handling
+* Maybe there is a way to find root elements and automatically take care of the `#tw-widget-root` embedding
+* When [[hello.eve]] is modified (i.e. change the div text) and the widget display is refreshed, somehow the old an new text is being displayed. Not sure if I've done something wrong on the tiddlywiki side or the eve side.
