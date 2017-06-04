@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170604134100231
+modified: 20170604210852782
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -65,4 +65,3 @@ Improvements needed:
 * Ability to pass in list of watchers to attach to the Eve program
 * Error handling
 * Maybe there is a way to find root elements and automatically take care of the `#tw-widget-root` embedding
-* When [[hello.eve]] is modified (i.e. change the div text) and the widget display is refreshed, somehow the old an new text is being displayed. Not sure if I've done something wrong on the tiddlywiki side or the eve side.

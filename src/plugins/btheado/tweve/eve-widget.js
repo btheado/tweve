@@ -21,6 +21,7 @@ class EveWidget extends Widget {
       class: 'tc-widget'
     });
     parent.insertBefore(this.domNode, nextSibling);
+    this.domNodes.push(this.domNode); // So refreshSelf will clean up old domNode
 
     // Creating a new program every time with no cleanup
     // seems like a bad idea. TW requires a workaround in order
