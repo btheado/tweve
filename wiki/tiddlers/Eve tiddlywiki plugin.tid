@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170605001618992
+modified: 20170605011731296
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -10,35 +10,23 @@ This plugin implements a [[Tiddlywiki|http://tiddlywiki.com]] widget which allow
 
 The widget is exposed with the name ``eve``. Eve code is passed into the widget using the ``markdown`` attribute. Tiddlywiki widget [[attributes|http://tiddlywiki.com/static/Widgets%2520in%2520WikiText.html]] can be specified several ways.
 
-The triple double quotes allow multi-line text to be passed, so the eve program can be specified within the widget call itself:
-
-<pre><code>
-<$view tiddler="hello.eve triple double quotes" format=text/>
-</code></pre>
-
-This renders as:
-
-<<<
- <$eve markdown={{hello.eve triple double quotes}}/>
-<<<
-
-Another approach is to write the eve code in its own tiddler such as [[hello.eve]] and use the transclusion attribute syntax to pass in the source code:
+One way is to add the code to a separate tiddler such as [[hello.eve]] and pass the contents of that tiddler by using the double curly syntax.  It looks like this:
 
 ```
  <$eve markdown={{hello.eve}}/>
 ```
 
-This renders as
+and will render as
 
 <<<
  <$eve markdown={{hello.eve}}/>
 <<<
 
----
+The contents of [[hello.eve]] looks like this:
 
-Note how the ``#ui/div`` elements in the above examples are placed as children of ``#tw-widget-root``. This is not required in a normal, standalone Eve program. It is only needed in order to get the output to appear in the page where the widget instance is defined.
+{{hello.eve}}
 
-Currently, the state of the widget is not being saved anywhere, so anytime this tiddler gets refreshed (i.e. close and open the tiddler among many other possibilities), any eve state will be lost. The above examples do not have any state.
+Note how the ``#ui/div`` element in the above examples is placed as a child of ``#tw-widget-root``. This is not required in a normal, standalone Eve program. It is only needed in order to get the output to appear in the page where the widget instance is defined. This is part of the "embedding" aspect of Eve.
 
 ---
 
@@ -55,6 +43,22 @@ This renders as
 <<<
 
 You can click the `+` and `-` to increment and decrement the counters.
+
+Currently, the state of the widget is not being saved anywhere, so anytime this tiddler gets refreshed (i.e. close and open the tiddler among many other possibilities), any eve state will be lost. The [[hello.eve]] example doesn't have any state, but the [[counter.eve]] example does. If you change the values by clicking the buttons, then close and re-open this tiddler, the values will reset back to zero.
+
+---
+
+Another example which shows how the [[Tiddlywiki triple double quote syntax|http://tiddlywiki.com/static/Widgets%2520in%2520WikiText.html]]  can be used to embed the eve source code directly within the widget call:
+
+<pre><code>
+<$view tiddler="hello.eve triple double quotes" format=text/>
+</code></pre>
+
+This renders as:
+
+<<<
+<$eve markdown={{hello.eve triple double quotes}}/>
+<<<
 
 ---
 
