@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170605011731296
+modified: 20170605020220860
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -58,6 +58,19 @@ This renders as:
 
 <<<
 <$eve markdown={{hello.eve triple double quotes}}/>
+<<<
+
+---
+Another example: [[tic-tac-toe.eve]]
+
+```
+ <$eve markdown={{tic-tac-toe.eve}}/>
+```
+
+This renders as
+
+<<<
+ <$eve markdown={{tic-tac-toe.eve}}/>
 <<<
 
 ---
