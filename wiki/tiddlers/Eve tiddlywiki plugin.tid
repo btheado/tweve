@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170604210852782
+modified: 20170605001618992
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -54,13 +54,12 @@ This renders as
  <$eve markdown={{counter.eve}}/>
 <<<
 
-You can click the `+` and `-` to increment and decrement the counters. As you can see it looks bad because the `#ui` styling is not properly setup
+You can click the `+` and `-` to increment and decrement the counters.
 
 ---
 
 Improvements needed:
 
-* `#ui` styling
 * Ability to save Eve state
 * Ability to pass in list of watchers to attach to the Eve program
 * Error handling

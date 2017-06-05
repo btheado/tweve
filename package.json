@@ -32,7 +32,7 @@
     "webpack": "^2.4.1"
   },
   "scripts": {
-    "build": "webpack && cpx src/plugins/**/*.{plugin,info,tid,files} dist",
+    "build": "webpack && cpx src/plugins/**/*.{css,plugin,info,tid,files} dist",
     "build:production": "webpack -p",
     "build:index": "npm run tw -- --build index",
     "tw": "cross-env TIDDLYWIKI_PLUGIN_PATH=./dist tiddlywiki ./wiki --verbose",

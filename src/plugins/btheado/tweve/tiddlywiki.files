@@ -1,6 +1,14 @@
 {
   "tiddlers": [
     {
+      "file": "eve-base.css",
+      "fields": {
+        "type": "text/css",
+        "title": "$:/plugins/btheado/eve/eve-base.css",
+        "tags": "$:/tags/Stylesheet"
+      }
+    },
+    {
       "file": "eve-widget.js",
       "prefix": "if($tw.browser){\n",
       "suffix": "\n}",
