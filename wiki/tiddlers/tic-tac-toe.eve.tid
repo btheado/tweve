@@ -1,6 +1,6 @@
 created: 20170605015855313
 creator: 0.0.0.0
-modified: 20170605022305611
+modified: 20170608003544185
 modifier: 0.0.0.0
 tags: 
 title: tic-tac-toe.eve
@@ -185,16 +185,6 @@ search
 
 bind
   style.color := "blue"
-```
-
-Embed the top-level `#ui/div` into `#tw-widget-root`
-
-```
-search
-    root = [#tw-widget-root]
-    boarddiv = [#ui/div board #container]
-commit
-    root.children += boarddiv
 ```
 
 !!! Draw status message

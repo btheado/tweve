@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170605020220860
+modified: 20170608004938113
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -26,8 +26,6 @@ The contents of [[hello.eve]] looks like this:
 
 {{hello.eve}}
 
-Note how the ``#ui/div`` element in the above examples is placed as a child of ``#tw-widget-root``. This is not required in a normal, standalone Eve program. It is only needed in order to get the output to appear in the page where the widget instance is defined. This is part of the "embedding" aspect of Eve.
-
 ---
 
 Another example - [[counter.eve]]
@@ -48,7 +46,7 @@ Currently, the state of the widget is not being saved anywhere, so anytime this 
 
 ---
 
-Another example which shows how the [[Tiddlywiki triple double quote syntax|http://tiddlywiki.com/static/Widgets%2520in%2520WikiText.html]]  can be used to embed the eve source code directly within the widget call:
+Another example. This one shows how the [[Tiddlywiki triple double quote syntax|http://tiddlywiki.com/static/Widgets%2520in%2520WikiText.html]]  can be used to embed the eve source code directly within the widget call:
 
 <pre><code>
 <$view tiddler="hello.eve triple double quotes" format=text/>
@@ -80,4 +78,3 @@ Improvements needed:
 * Ability to save Eve state
 * Ability to pass in list of watchers to attach to the Eve program
 * Error handling
-* Maybe there is a way to find root elements and automatically take care of the `#tw-widget-root` embedding

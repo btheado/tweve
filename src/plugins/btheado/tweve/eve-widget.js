@@ -33,7 +33,34 @@ class EveWidget extends Widget {
 
     // Define the eve program
     this.markdown = this.getAttribute("markdown");
-    this.prog.load(this.markdown);
+
+    // Append an eve block to the end so any root-less html elements
+    // will automatically be attached to the widget rather than to
+    // the document body. Code compliments of Josh Cole.
+    var markdown = this.markdown + `
+Any element with no parent (or that is already a child of the widget root) is parented to the widget root.
+~~~
+      search
+        widget-root = [#tw-widget-root]
+        elem = [#html/element]
+        elem != widget-root
+        not(
+          parent = [#html/element children: elem]
+          parent != [#tw-widget-root]
+        )
+
+      bind
+        widget-root.children += elem
+~~~
+
+The extra bit of trickery in the 'not' is required to prevent the block from
+invalidating itself. If we kept the existing search logic, it would first match
+a root element, adding it as a child of the widget. Doing so would make it no
+longer match, so it would stop being a child. This would allow it to match
+again, ad infinitum. Instead, we include the loophole that, if an element's
+parent is already the widget, we'll continue asserting that.
+    `;
+    this.prog.load(markdown);
 
     // addExternalRoot must come after the program is defined
     // or it won't work

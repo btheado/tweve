@@ -1,6 +1,6 @@
 created: 20170604124615774
 creator: 0.0.0.0
-modified: 20170604130157818
+modified: 20170608003400377
 modifier: 0.0.0.0
 tags: 
 title: counter.eve
@@ -39,10 +39,8 @@ For every `#counter`, we create a `#ui/row` that contains the elements that draw
 ```
 search
   counter = [#counter count]
-  root = [#tw-widget-root]
 
 bind
-  root.children +=
     [#ui/row counter sort: counter.sort style: [flex: "0 0 auto" width: "100px"] children:
       [#ui/button text: "-" diff: -1 counter]
       [#ui/text text: count counter style: [padding: "0 6px" flex: 1 text-align: "right"]]
