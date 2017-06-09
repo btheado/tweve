@@ -62,11 +62,67 @@ parent is already the widget, we'll continue asserting that.
     `;
     this.prog.load(markdown);
 
+    // Attach a watcher for persisting data. Only if the user gave a
+    // tiddler in which the data should be saved
+    let saveTitle = this.getAttribute("save-tiddler");
+    if (saveTitle) {
+      this.watchForPersistChanges(saveTitle);
+      this.loadDataFromTiddler(saveTitle);
+    }
+
     // addExternalRoot must come after the program is defined
     // or it won't work
     htmlWatcher.addExternalRoot("tw-widget-root", this.domNode);
   }
 
+  watchForPersistChanges(saveTitle) {
+    // Currently hard-coded to only work with the counter demo
+    this.prog.watch("Export #counter tagged data to a tiddler", ({find, record}) => {
+      let counter = find("counter");
+      let {count, sort} = counter;
+      return [
+        record("counter", {count, sort})
+      ];
+    })
+    .asObjects(({adds, removes}) => {
+      //this.logger.log("obj add  " + JSON.stringify(adds));
+      //this.logger.log("obj rem  " + JSON.stringify(removes));
+      for(let id in adds) {
+        // Save the data in a field of the given tiddler. Prefix each field name
+        // with 'eve-' since only those fields will be loaded in on widget refresh
+        // TODO: maybe use lower level tiddlywiki api as I'm not sure all
+        // characters in 'eve-<id>' will make it through untouched as it
+        // didnt' work when I used 'eve/<id>'.
+        this.wiki.setTextReference(saveTitle + "!!" + "eve-" + id, JSON.stringify(adds[id]));
+      }
+      for(let id in removes) {
+        this.wiki.deleteTextReference(saveTitle + "!!" + "eve-" + id, JSON.stringify(removes[id]));
+      }
+    });
+  }
+
+  loadDataFromTiddler(saveTitle) {
+    // If the tiddler already exists for the given saveTitle
+    // then load the fields
+    let saveTiddler = this.wiki.getTiddler(saveTitle);
+    if (saveTiddler) {
+      // Load the fields from the tiddler into EAVs
+      var inputs = [];
+      for(var fieldName in saveTiddler.fields) {
+        if (fieldName.startsWith("eve-")) {
+          let obj = JSON.parse(saveTiddler.getFieldString(fieldName));
+          let e = fieldName.substring(4);
+          for (let key of Object.keys(obj)) {
+            inputs.push([e, key, obj[key]]);
+          }
+        }
+      }
+      this.prog.inputEAVs(inputs);
+    }
+  }
+
+  // TODO: Also refresh if this.getAttribute("save-tiddler") is in changedTiddlers
+  // but need to figure out how to avoid circular updates
   refresh(changedTiddlers) {
     // Refresh if the input sourcecode has changed
     this.computeAttributes();
