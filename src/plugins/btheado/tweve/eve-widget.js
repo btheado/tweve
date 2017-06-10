@@ -76,28 +76,50 @@ parent is already the widget, we'll continue asserting that.
   }
 
   watchForPersistChanges(saveTitle) {
-    // Currently hard-coded to only work with the counter demo
-    this.prog.watch("Export #counter tagged data to a tiddler", ({find, record}) => {
-      let counter = find("counter");
-      let {count, sort} = counter;
+    this.prog.watch("Export #persist tagged data to a tiddler", ({find, record, lookup}) => {
+      let rec = find("persist");
+      let {attribute, value} = lookup(rec);
+
       return [
-        record("counter", {count, sort})
+        rec.add(attribute, value)
       ];
     })
-    .asObjects(({adds, removes}) => {
-      //this.logger.log("obj add  " + JSON.stringify(adds));
-      //this.logger.log("obj rem  " + JSON.stringify(removes));
-      for(let id in adds) {
-        // Save the data in a field of the given tiddler. Prefix each field name
-        // with 'eve-' since only those fields will be loaded in on widget refresh
-        // TODO: maybe use lower level tiddlywiki api as I'm not sure all
-        // characters in 'eve-<id>' will make it through untouched as it
-        // didnt' work when I used 'eve/<id>'.
-        this.wiki.setTextReference(saveTitle + "!!" + "eve-" + id, JSON.stringify(adds[id]));
+    .asDiffs(({adds, removes}) => {
+      this.logger.log("obj add  " + JSON.stringify(adds));
+      this.logger.log("obj rem  " + JSON.stringify(removes));
+      let saveTiddler = this.wiki.getTiddler(saveTitle);
+      var p = {};
+      for(let [eav, setop] of [[adds, (s,v) => {s.add(v);}], [removes, (s,v) => {s.delete(v);}]]) {
+        for(let [e, a, v] of eav) {
+          if (!p.hasOwnProperty(e)) {
+            p[e] = {};
+            if (saveTiddler) {
+              let json = saveTiddler.getFieldString("eve-" + e);
+              if (json) {
+                let avs = JSON.parse(json);
+                for(let key in avs) {
+                  p[e][key] = new Set(avs[key]);
+                }
+              }
+            }
+          }
+          if (!p[e].hasOwnProperty(a)) {
+            p[e][a] = new Set();
+          }
+          setop(p[e][a], v);
+        }
       }
-      for(let id in removes) {
-        this.wiki.deleteTextReference(saveTitle + "!!" + "eve-" + id, JSON.stringify(removes[id]));
+      //var tw = {};
+      for(let e in p) {
+        for(let a in p[e]) {
+          // TODO: if p[e][a] has length zero, then should delete p[e][a]
+          p[e][a] = Array.from(p[e][a]);
+        }
+        // TODO: if p[e] ends up empty, then the tiddler field should be deleted?
+        //tw[e] = JSON.stringify(p[e]);
+        this.wiki.setText(saveTitle, "eve-" + e, undefined, JSON.stringify(p[e]));
       }
+      //console.log(JSON.stringify(tw));
     });
   }
 
@@ -110,13 +132,18 @@ parent is already the widget, we'll continue asserting that.
       var inputs = [];
       for(var fieldName in saveTiddler.fields) {
         if (fieldName.startsWith("eve-")) {
-          let obj = JSON.parse(saveTiddler.getFieldString(fieldName));
+          let avs = JSON.parse(saveTiddler.getFieldString(fieldName));
           let e = fieldName.substring(4);
-          for (let key of Object.keys(obj)) {
-            inputs.push([e, key, obj[key]]);
+          for (let a in avs) {
+            for (let v of avs[a]) {
+              console.log("pushing");
+              console.log([e, a, v]);
+              inputs.push([e, a, v]);
+            }
           }
         }
       }
+      // TODO: if inputs is empty then don't make this call as it causes exception
       this.prog.inputEAVs(inputs);
     }
   }
