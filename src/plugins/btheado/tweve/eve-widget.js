@@ -143,8 +143,9 @@ parent is already the widget, we'll continue asserting that.
           }
         }
       }
-      // TODO: if inputs is empty then don't make this call as it causes exception
-      this.prog.inputEAVs(inputs);
+      if (inputs.length > 0) {
+        this.prog.inputEAVs(inputs);
+      }
     }
   }
 
