@@ -75,6 +75,29 @@ parent is already the widget, we'll continue asserting that.
     htmlWatcher.addExternalRoot("tw-widget-root", this.domNode);
   }
 
+  //
+  // With two eve records like this:
+  //
+  // [#counter #persist sort: 1 count: 0]
+  // [#counter #persist sort: 2 count: 0]
+  //
+  // The eavs come out to the watcher looking like this:
+  //
+  // [ "count|0|sort|1|tag|counter|tag|persist", "tag", "counter" ],
+  // [ "count|0|sort|1|tag|counter|tag|persist", "tag", "persist" ],
+  // [ "count|0|sort|1|tag|counter|tag|persist", "sort", 1 ],
+  // [ "count|0|sort|1|tag|counter|tag|persist", "count", 0 ],
+  // [ "count|0|sort|2|tag|counter|tag|persist", "tag", "counter" ],
+  // [ "count|0|sort|2|tag|counter|tag|persist", "tag", "persist" ],
+  // [ "count|0|sort|2|tag|counter|tag|persist", "sort", 2 ],
+  // [ "count|0|sort|2|tag|counter|tag|persist", "count", 0 ]
+  //
+  // The 'e' from the eav is used as the tiddler field name and the attributes and values are
+  // grouped together like this:
+  //
+  // eve-count|0|sort|1|tag|counter|tag|persist - {"tag":["counter","persist"],"sort":[1],"count":[0]}
+  // eve-count|0|sort|2|tag|counter|tag|persist - {"tag":["counter","persist"],"sort":[2],"count":[0]}
+  //
   watchForPersistChanges(saveTitle) {
     this.prog.watch("Export #persist tagged data to a tiddler", ({find, record, lookup}) => {
       let rec = find("persist");
@@ -84,33 +107,65 @@ parent is already the widget, we'll continue asserting that.
         rec.add(attribute, value)
       ];
     })
+    // Each entity (e) in the eav diffs is used as a tiddler field name with stringified
+    // json of the attribute (a) and values (v) stored as the tiddler field value.
     .asDiffs(({adds, removes}) => {
       this.logger.log("obj add  " + JSON.stringify(adds));
       this.logger.log("obj rem  " + JSON.stringify(removes));
       let saveTiddler = this.wiki.getTiddler(saveTitle);
+
+      // The p object is used to build up the tiddler field value pairs related to the
+      // eav which have been passed in as adds and removes
       var p = {};
+
+      // The outer loop is for handling both the adds and the removes. The code is the same for
+      // both except the adds add set elements and the removes delete set elements
       for(let [eav, setop] of [[adds, (s,v) => {s.add(v);}], [removes, (s,v) => {s.delete(v);}]]) {
         for(let [e, a, v] of eav) {
+          // Have we already seen this 'e' since the method call started?
           if (!p.hasOwnProperty(e)) {
+            // No. Create it fresh
             p[e] = {};
+
+            // Does the tiddler to which the data will be saved exist yet?
             if (saveTiddler) {
+              // Yes. Since the tiddler exists there may be previously
+              // persisted values which the diffs need to be "merged" with
+              // The eve related fields have 'eve-' prefix so the list of
+              // fields can be queried later and the non-eve related ones
+              // can be filtered out.
               let json = saveTiddler.getFieldString("eve-" + e);
+
+              // Does the 'e' field already exist in the tiddler?
               if (json) {
+                // Yes.  Parse the key/value json into javascript object
                 let avs = JSON.parse(json);
+
+                // Each value is a Set, but in json it has to be stored
+                // as array, so convert each array into a Set
                 for(let key in avs) {
                   p[e][key] = new Set(avs[key]);
                 }
               }
             }
           }
+
+          // Does the ea already exist from the data in the tiddler?
           if (!p[e].hasOwnProperty(a)) {
+            // No. Create it fresh
             p[e][a] = new Set();
           }
+
+          // Either add or remove the element from the ea set
           setop(p[e][a], v);
         }
       }
       //var tw = {};
+
+      // Now the diffs have been applied and the data can be written
+      // back to the tiddler
       for(let e in p) {
+        // In order to serialize to json, convert Set to Array
         for(let a in p[e]) {
           // TODO: if p[e][a] has length zero, then should delete p[e][a]
           p[e][a] = Array.from(p[e][a]);
@@ -136,8 +191,8 @@ parent is already the widget, we'll continue asserting that.
           let e = fieldName.substring(4);
           for (let a in avs) {
             for (let v of avs[a]) {
-              console.log("pushing");
-              console.log([e, a, v]);
+              //console.log("pushing");
+              //console.log([e, a, v]);
               inputs.push([e, a, v]);
             }
           }
