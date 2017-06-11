@@ -1,0 +1,15 @@
+created: 20170610231821010
+creator: 0.0.0.0
+modified: 20170611124005977
+modifier: 0.0.0.0
+title: test-eve-save
+type: text/vnd.tiddlywiki
+
+This tiddler is used to store the eve state for the [[counter.eve]] code. Here are the eve related fields being stored in this tiddler:
+
+<$list variable=field filter="[all[current]fields[]] -text -created -creator -modified -tags -title -modifier -type -revision -bag">
+
+* ''<<field>>'' - <$transclude field=<<field>> mode=inline/>
+</$list>
+
+Click the edit button on this tiddler to see more.

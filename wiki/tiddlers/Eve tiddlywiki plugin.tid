@@ -1,16 +1,46 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170608004938113
+modified: 20170611123838277
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
 type: text/vnd.tiddlywiki
 
+!Introduction
 This plugin implements a [[Tiddlywiki|http://tiddlywiki.com]] widget which allows an [[Eve|https://github.com/witheve/Eve]] program to be embedded.
 
-The widget is exposed with the name ``eve``. Eve code is passed into the widget using the ``markdown`` attribute. Tiddlywiki widget [[attributes|http://tiddlywiki.com/static/Widgets%2520in%2520WikiText.html]] can be specified several ways.
+<<<
+* New to Eve? Check out http://witheve.com/ and http://play.witheve.com/
+* New to Tiddlywiki? There's much to learn. http://tiddlywiki.com is the best place to start
+<<<
 
-One way is to add the code to a separate tiddler such as [[hello.eve]] and pass the contents of that tiddler by using the double curly syntax.  It looks like this:
+Example using the eve widget to "render" an Eve program which can be used as a two person game of Tic-Tac-Toe
+
+```
+ <$eve markdown={{tic-tac-toe.eve}}/>
+```
+
+This renders as
+
+<<<
+ <$eve markdown={{tic-tac-toe.eve}}/>
+<<<
+
+Click the squares above to play. Open the [[tic-tac-toe.eve]] tiddler to view the source code.
+
+! Tiddlywiki widgets and Eve
+
+Widgets in Tiddlywiki are a way to provide extended functionality beyond the wiki syntax and html markup. There are many core widgets included with Tiddlywiki by default and javascript code can be written to add new widgets. 
+
+Eve code has its own syntax. It also has a Javascript DSL which can be used to glue it together with other javascript projects. Here it is glued to Tiddlywiki by exposing a Tiddlywiki widget with the name ``eve``. This ``eve`` widget allows the Eve syntax to be rendered inside of Tiddlywiki.
+
+A program specified with the Eve syntax is a valid markdown document with the actual Eve code embedded inside the triple backtick sections. The Tiddlywiki [[wiki syntax|http://tiddlywiki.com/static/WikiText.html]] is partially based on markdown. The important part is the wiki syntax supports marking [[code blocks|http://tiddlywiki.com/static/Code%2520Blocks%2520in%2520WikiText.html]] with triple back ticks just like Eve. This means Eve code can be authored inside of Tiddlywiki tiddlers using the wiki syntax and it will look nice for reading. Then with the `eve` widget that same code can be executed.
+
+Eve code is passed into the widget using the ``markdown`` attribute.  Tiddlywiki widget [[attributes|http://tiddlywiki.com/static/Widgets%2520in%2520WikiText.html]] can be specified several ways. Two ways are described here.
+
+!! Double curly brace attribute syntax
+
+One way is to add the code to a separate tiddler and pass the contents of that tiddler to the ``eve`` markdown attribute using the doubly curly brace syntax. This was done with the Tic-Tac-Toe example above and [[hello.eve]] is a simpler example of the same:
 
 ```
  <$eve markdown={{hello.eve}}/>
@@ -26,27 +56,9 @@ The contents of [[hello.eve]] looks like this:
 
 {{hello.eve}}
 
----
+!! Triple double quote attribute syntax
 
-Another example - [[counter.eve]]
-
-```
- <$eve markdown={{counter.eve}}/>
-```
-
-This renders as
-
-<<<
- <$eve markdown={{counter.eve}}/>
-<<<
-
-You can click the `+` and `-` to increment and decrement the counters.
-
-Currently, the state of the widget is not being saved anywhere, so anytime this tiddler gets refreshed (i.e. close and open the tiddler among many other possibilities), any eve state will be lost. The [[hello.eve]] example doesn't have any state, but the [[counter.eve]] example does. If you change the values by clicking the buttons, then close and re-open this tiddler, the values will reset back to zero.
-
----
-
-Another example. This one shows how the [[Tiddlywiki triple double quote syntax|http://tiddlywiki.com/static/Widgets%2520in%2520WikiText.html]]  can be used to embed the eve source code directly within the widget call:
+This example shows how the [[Tiddlywiki triple double quote syntax|http://tiddlywiki.com/static/Widgets%2520in%2520WikiText.html]]  can be used to embed the eve source code directly within the widget call:
 
 <pre><code>
 <$view tiddler="hello.eve triple double quotes" format=text/>
@@ -59,22 +71,12 @@ This renders as:
 <<<
 
 ---
-Another example: [[tic-tac-toe.eve]]
 
-```
- <$eve markdown={{tic-tac-toe.eve}}/>
-```
-
-This renders as
-
-<<<
- <$eve markdown={{tic-tac-toe.eve}}/>
-<<<
+You can also use the `#persist` tag in your eve code to selective store the eve state of your program in tiddler fields. See [[Storing eve state in tiddlers]]
 
 ---
 
 Improvements needed:
 
-* Ability to save Eve state
-* Ability to pass in list of watchers to attach to the Eve program
+* Ability to pass in list of watchers to attach to the Eve program. Curently only the html and ui watchers are being attached. This means Eve programs using canvas or svg or system timers will not work.
 * Error handling

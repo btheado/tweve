@@ -1,6 +1,6 @@
 created: 20170604124615774
 creator: 0.0.0.0
-modified: 20170608003400377
+modified: 20170611122401756
 modifier: 0.0.0.0
 tags: 
 title: counter.eve
@@ -51,11 +51,12 @@ Add some counters programatically. To make `n` unique and independent counters, 
 
 ```
 search
-  sort = math/range[start: 1 stop: 4]
+  sort = math/range[start: 1 stop: 2]
+  not([#counter sort: s count: c])
 
 commit
-  [#counter sort count: 0]
-  [#counter #fancy sort: 5 count: 0]
+  [#counter #persist sort count: 0]
+  [#counter #persist #fancy sort: 5 count: 0]
 ```
 
 !!! Extend the Counter

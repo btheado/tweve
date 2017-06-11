@@ -1,10 +1,10 @@
 created: 20170428230350560
 creator: 0.0.0.0
-modified: 20170604130906565
+modified: 20170611123054506
 modifier: 0.0.0.0
 title: $:/DefaultTiddlers
 type: text/vnd.tiddlywiki
 
 [[Eve tiddlywiki plugin]]
-hello.eve
+[[Storing eve state in tiddlers]]
 counter.eve

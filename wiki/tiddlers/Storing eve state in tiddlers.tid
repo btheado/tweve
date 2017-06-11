@@ -1,0 +1,72 @@
+created: 20170611114702146
+creator: 0.0.0.0
+modified: 20170611122945574
+modifier: 0.0.0.0
+tags: 
+title: Storing eve state in tiddlers
+type: text/vnd.tiddlywiki
+
+The state of an eve program can be stored to tiddler fields. This is important because tiddlers frequently get refreshed (i.e. closing and opening a tiddler among many other possibilities).  Upon refresh, the `eve` widget is recreated from scratch.
+
+For the [[hello.eve]] example this does not matter because that program has no changeable state. 
+
+However, this [[counter.eve]] example is an interactive program in which counters can be incremented and decremented by clicking on the `+` and `-` buttons.
+
+```
+<$eve markdown={{counter.eve}}/>
+```
+
+which renders as
+
+<$eve markdown={{counter.eve}}/>
+
+If you click the buttons to change the counter values and then close and reopen this tiddler, the counters will be reset back to zero.
+
+There are two requirements for persisting the state. First, the eve records you want stored must be marked with the `#persist` tag. Also, the name of a tiddler to which the data is to be stored must be passed into the widget using the optional attribute `save-tiddler`.
+
+The first requirement is already met in the [[counter.eve]] code. In this widget instantiation, the 2nd requirement is met:
+
+```
+<$eve save-tiddler="test-eve-save" markdown={{counter.eve}}/>
+```
+
+which renders as
+
+<$eve save-tiddler="test-eve-save" markdown={{counter.eve}}/>
+
+if you change these counters and refresh the widget, the changes will not be lost.
+
+You can inspect the persisted data at [[test-eve-save]]
+
+---
+
+The original counter.eve example generated the initial counters like this:
+
+```
+search
+  sort = math/range[start: 1 stop: 2]
+
+commit
+  [#counter sort count: 0]
+  [#counter #fancy sort: 5 count: 0]
+```
+
+In order to add support for storing the `#counter` records, I changed it to this:
+
+```
+search
+  sort = math/range[start: 1 stop: 2]
+  not([#counter sort: s count: c])
+
+commit
+  [#counter #persist sort count: 0]
+  [#counter #persist #fancy sort: 5 count: 0]
+```
+
+The `#persist` tag is added to the `#counter` records and also the `not([#counter sort: s count: c])` line is added in order to generate the initial counters only if none are already found.
+
+---
+
+''Note'': I haven't tested this functionality much yet, so it is likely far from perfect.
+
+''Note'': Clicking the buttons above in one of the eve widget instances causes the counters in the other widget instance to be modified. I need to investigate that.
