@@ -1,6 +1,9 @@
 // witheve-watchers is defined via webpack alias
+import "witheve-watchers/canvas"
 import "witheve-watchers/compiler"
 import "witheve-watchers/html"
+import "witheve-watchers/svg"
+import "witheve-watchers/system"
 import "witheve-watchers/ui"
 import { Program } from "witheve";
 
@@ -30,6 +33,9 @@ class EveWidget extends Widget {
     // purposes, this is fine
     this.prog = new Program("tw eve widget");
     var htmlWatcher = this.prog.attach("html");
+    this.prog.attach("canvas");
+    this.prog.attach("svg");
+    this.prog.attach("system");
 
     // Define the eve program
     this.markdown = this.getAttribute("markdown");

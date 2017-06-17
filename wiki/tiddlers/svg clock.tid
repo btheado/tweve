@@ -1,0 +1,19 @@
+created: 20170611221450475
+creator: 0.0.0.0
+modified: 20170617140654112
+modifier: 0.0.0.0
+tags: 
+title: svg clock
+type: text/vnd.tiddlywiki
+
+```
+<$eve markdown={{clock.eve}}/>
+```
+
+renders as
+
+<$eve markdown={{clock.eve}}/>
+
+The code from [[clock.eve]]:
+
+{{clock.eve}}

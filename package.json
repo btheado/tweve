@@ -19,7 +19,7 @@
     "browser"
   ],
   "dependencies": {
-    "witheve": "preview"
+    "witheve": "github:witheve/Eve"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

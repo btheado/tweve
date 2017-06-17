@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170611123838277
+modified: 20170617144620803
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -70,13 +70,14 @@ This renders as:
 <$eve markdown={{hello.eve triple double quotes}}/>
 <<<
 
----
+! More features and examples
 
-You can also use the `#persist` tag in your eve code to selective store the eve state of your program in tiddler fields. See [[Storing eve state in tiddlers]]
+* ''Persistence'' - Eve records tagged with the `#persist` will automaticlly be stored in tiddler fields as they change. Upon widget refresh, the fiels will be loaded back into the eve program. See [[Storing eve state in tiddlers]] for details and a demo
+* ''SVG'' - [[svg clock]]
+*  ''Canvas'' - [[canvas demo]]
 
 ---
 
 Improvements needed:
 
-* Ability to pass in list of watchers to attach to the Eve program. Curently only the html and ui watchers are being attached. This means Eve programs using canvas or svg or system timers will not work.
-* Error handling
+* Better error handling - the eve widget code isn't currently catching any errors, resulting in the big, red "Internal ~JavaScript Error" ~TiddlyWiki error dialog box.

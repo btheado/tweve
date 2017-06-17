@@ -1,0 +1,74 @@
+created: 20170617134509013
+creator: 0.0.0.0
+modified: 20170617140156765
+modifier: 0.0.0.0
+tags: 
+title: canvas-demo.eve
+type: text/vnd.tiddlywiki
+
+This is the start of a translation of [[canvas-demo.ts|https://github.com/witheve/eve-starter/blob/6b0cf201c400efe05f949b36c771dd4950cde5b3/programs/canvas-demo.ts]] from the Javascript DSL into Eve syntax
+
+! Description
+ 
+The Canvas watcher allows you to declaratively draw to HTML5 canvas elements.
+ 
+! Terms
+
+* `canvas/root` is an html canvas element https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas.
+* `canvas/path` is a Path2D https://developer.mozilla.org/en-US/docs/Web/API/Path2D.
+* Children of `canvas/path`s are operations to execute on their parent.
+
+! Notes
+
+Canvas has an inherently sequential API. This sequence is reflected in Eve using the `sort` attribute.
+
+Paths with higher sorts will draw on top of paths with lower sorts. Ditto for operations.
+
+Style properties https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors can be set
+as attributes of the path.
+
+Pay special attention to the `example` attribute. It's used to make the containers and canvases of each example unique.
+Without it, both blocks would write into the same canvas in the same container, leading to a single canvas with all the paths
+of the individual examples in it!
+
+In the current version of the canvas watcher, all attributes for an operation are ''required''. We'll fix this in the future.
+
+For optimal performance, it's recommended that you try to separate things which change frequently
+and things that don't into separate paths, as the Canvas API requires rerendering an entire path when it changes.
+
+! The code
+
+An example container is a div with a title
+
+```
+search
+  container = [#container]
+bind
+  container <- [#ui/div class: container children: [#ui/div sort: 0 text: container.example]]
+```
+
+Draw a simple square.
+
+```
+search
+  example = "Square"
+bind
+  [#container example, children:
+    [#canvas/root sort: 1, width: 160, height: 140, example, children:
+      [#canvas/path sort: 1, fillStyle: "rgb(0, 158, 224)", children:
+        [sort: 1, type: "rect", x: 30, y: 20, width: 100, height: 100]]]]
+```
+
+Draw a compound path
+
+```
+search
+  example = "Compound path"
+bind
+  [#container example, children:
+    [#canvas/root sort: 1, width: 160, height: 140, example, children:
+      [#canvas/path sort: 1, strokeStyle: "rgb(91,89,164)", lineWidth: 2, lineCap: "square", lineJoin: "bevel", children: 
+        [sort: 1, type: "rect", x: 50, y: 30, width: 50, height: 75]
+        [sort: 2, type: "moveTo", x: 100, y: 55]
+        [sort: 3, type: "ellipse", x: 100, y: 75, radiusX: 25, radiusY: 50, rotation: 0, startAngle: 0, endAngle: 3.14 * 3 / 4, anticlockwise: "false"]]]]
+```
