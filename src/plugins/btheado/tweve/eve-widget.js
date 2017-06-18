@@ -38,12 +38,41 @@ class EveWidget extends Widget {
     this.prog.attach("system");
 
     // Define the eve program
-    this.markdown = this.getAttribute("markdown");
+    this.eveSource = this.getEveSource(this.getAttribute("markdown"), this.getAttribute("filter"));
+    this.prog.load(this.eveSource);
+
+    // Attach a watcher for persisting data. Only if the user gave a
+    // tiddler in which the data should be saved
+    let saveTitle = this.getAttribute("save-tiddler");
+    if (saveTitle) {
+      this.watchForPersistChanges(saveTitle);
+      this.loadDataFromTiddler(saveTitle);
+    }
+
+    // addExternalRoot must come after the program is defined
+    // or it won't work
+    htmlWatcher.addExternalRoot("tw-widget-root", this.domNode);
+  }
+
+  getEveSource(markdown, filter) {
+    var eveSource = "";
+    if (markdown) {
+      eveSource += markdown;
+    }
+    if (filter) {
+      let tiddlers = this.wiki.filterTiddlers(filter,this);
+      for (let title of tiddlers) {
+        let tiddler = this.wiki.getTiddler(title);
+        if (tiddler) {
+          eveSource += tiddler.getFieldString("text");
+        }
+      }
+    }
 
     // Append an eve block to the end so any root-less html elements
     // will automatically be attached to the widget rather than to
     // the document body. Code compliments of Josh Cole.
-    var markdown = this.markdown + `
+    eveSource += `
 Any element with no parent (or that is already a child of the widget root) is parented to the widget root.
 ~~~
       search
@@ -66,19 +95,8 @@ longer match, so it would stop being a child. This would allow it to match
 again, ad infinitum. Instead, we include the loophole that, if an element's
 parent is already the widget, we'll continue asserting that.
     `;
-    this.prog.load(markdown);
 
-    // Attach a watcher for persisting data. Only if the user gave a
-    // tiddler in which the data should be saved
-    let saveTitle = this.getAttribute("save-tiddler");
-    if (saveTitle) {
-      this.watchForPersistChanges(saveTitle);
-      this.loadDataFromTiddler(saveTitle);
-    }
-
-    // addExternalRoot must come after the program is defined
-    // or it won't work
-    htmlWatcher.addExternalRoot("tw-widget-root", this.domNode);
+    return eveSource;
   }
 
   //
@@ -215,8 +233,8 @@ parent is already the widget, we'll continue asserting that.
   refresh(changedTiddlers) {
     // Refresh if the input sourcecode has changed
     this.computeAttributes();
-    if(this.markdown !== this.getAttribute("markdown")) {
-      // Regenerate and rerender the widget and replace the existing DOM node
+    if(this.eveSource != this.getEveSource(this.getAttribute("markdown"), this.getAttribute("filter"))) {
+      // Source code has changed, so regenerate and rerender the widget and replace the existing DOM node
       this.prog.clear();
       this.refreshSelf();
       return true;
