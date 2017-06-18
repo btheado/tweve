@@ -1,6 +1,6 @@
 created: 20170617134509013
 creator: 0.0.0.0
-modified: 20170617140156765
+modified: 20170618030516265
 modifier: 0.0.0.0
 tags: 
 title: canvas-demo.eve
@@ -71,4 +71,64 @@ bind
         [sort: 1, type: "rect", x: 50, y: 30, width: 50, height: 75]
         [sort: 2, type: "moveTo", x: 100, y: 55]
         [sort: 3, type: "ellipse", x: 100, y: 75, radiusX: 25, radiusY: 50, rotation: 0, startAngle: 0, endAngle: 3.14 * 3 / 4, anticlockwise: "false"]]]]
+```
+
+Draw a canvas with multiple paths.
+
+```
+search
+  example = "Multiple paths"
+bind
+  [#container example children:
+    [#canvas/root sort: 1, width: 160, height: 140, example children:
+      [#canvas/path sort: 1, fillStyle: "rgb(0, 184, 241)" children:
+        [sort: 1, type: "rect", x: 40, y: 25, width: 50, height: 100]]
+      [#canvas/path sort: 1, strokeStyle: "rgb(0, 121, 177)", lineWidth: 10, lineCap: "round", lineJoin: "miter" children:
+        [sort: 1, type: "moveTo", x: 100, y: 25]
+        [sort: 2, type: "lineTo", x: 125, y: 50]
+        [sort: 3, type: "lineTo", x: 100, y: 75]
+        [sort: 4, type: "lineTo", x: 125, y: 100]
+        [sort: 5, type: "lineTo", x: 100, y: 125]]]]
+```
+
+Reusable equilateral triangle path block.
+
+```
+search
+  triangle = [#triangle x y side]
+  adjacent = side * math/cos[degrees: 30]
+bind
+  triangle <- [#canvas/path children:
+    [sort: 1, type: "moveTo", x, y]
+    [sort: 2, type: "lineTo", x: x + side / 2, y: y + adjacent]
+    [sort: 3, type: "lineTo", x: x - side / 2, y: y + adjacent]
+    [sort: 4, type: "closePath"]] // Draws a line back to the first vertex.
+```
+
+Draw a canvas with a reusable path component.
+
+```
+search
+  example = "Reusable path component"
+bind
+  [#container example children:
+    [#canvas/root sort: 1, width: 160, height: 140, example children:
+      [#triangle sort: 1, x: 80, y: 10, side: 100, fillStyle: "rgb(74, 64, 136)"]
+      [#triangle sort: 2, x: 80, y: 32, side: 60, fillStyle: "rgb(91, 89, 164)"]
+      [#triangle sort: 3, x: 80, y: 54, side: 20, fillStyle: "rgb(107, 103, 173)"]
+      [#triangle sort: 4, x: 80, y: 10, side: 50, strokeStyle: "rgb(0, 184, 241)", lineWidth: 2]
+      [#triangle sort: 4, x: 55, y: 53.5, side: 50, strokeStyle: "rgb(0, 184, 241)", lineWidth: 2]
+      [#triangle sort: 4, x: 105, y: 53.5, side: 50, strokeStyle: "rgb(0, 184, 241)", lineWidth: 2]]]
+
+```
+
+Add some CSS to spruce the place up. The flex-direction part doesn't seem to be working. Not sure why
+
+```
+bind
+  [#html/element tagname: "style" text: "
+      .tc-widget { flex-direction: row; justify-content: flex-start; align-content: flex-start; flex-wrap: wrap; }
+      .container { flex: 0 0 auto; margin: 20px; padding: 20px; padding-top: 0; width: 200px; height: 202px; background: white; border-radius: 3px;  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1); }
+      .container > div { margin: 10px 0; text-align: center; }
+    "]
 ```
