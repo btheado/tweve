@@ -1,0 +1,50 @@
+created: 20170618215214944
+creator: 0.0.0.0
+modified: 20170618215800375
+modifier: 0.0.0.0
+tags: flappy.eve
+title: flappy.eve/drawing
+type: text/vnd.tiddlywiki
+
+! Drawing
+
+!! Player
+
+Next we draw the `#player` at its (x,y) coordinates. Since the player is stationary in x, setting his x position here dynamically is just a formality, but it allows us to configure his position on the screen when we initialize. We create the sprite first, then set the x and y positions to let us reuse the same element regardless of where the player is.
+
+Draw the player
+
+```
+search
+  svg = [#game-window]
+  player = [#player x y]
+
+bind
+  sprite = [#svg/image player | width: 10 height: 10 href: "http://i.imgur.com/sp68LtM.gif" sort: 8]
+  sprite.x := x - 5
+  sprite.y := y - 5
+  svg.children += sprite
+```
+
+!! Obstacles
+
+Drawing obstacles is much the same process as drawing the player, but we encapsulate the sprites into a nested SVG to group and move them as a unit.
+
+Draw the obstacles
+
+```
+search
+  svg = [#game-window]
+  obstacle = [#obstacle x height gap]
+  bottom-height = height + gap
+  imgs = "https://cdn.rawgit.com/bhauman/flappy-bird-demo/master/resources/public/imgs"
+
+bind
+  sprite-group = [#svg/element tagname: "svg" #obs-spr obstacle | sort: 2 overflow: "visible" children:
+    [#svg/image obstacle y: 0 width: 10 height, preserveAspectRatio: "none" href: "{{imgs}}/pillar-bkg.png" sort: 1]
+    [#svg/image obstacle x: -1 y: height - 5 width: 12 height: 5 href: "{{imgs}}/lower-pillar-head.png" sort: 2]
+    [#svg/image obstacle y: bottom-height width: 10 height: 90 - bottom-height, preserveAspectRatio: "none" href: "{{imgs}}/pillar-bkg.png" sort: 1]
+    [#svg/image obstacle x: -1 y: bottom-height width: 12 height: 5 href: "{{imgs}}/lower-pillar-head.png" sort: 2]]
+  sprite-group.x := x
+  svg.children += sprite-group
+```

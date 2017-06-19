@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170617144620803
+modified: 20170619005959146
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -39,7 +39,6 @@ A program specified with the Eve syntax is a valid markdown document with the ac
 Eve code is passed into the widget using the ``markdown`` attribute.  Tiddlywiki widget [[attributes|http://tiddlywiki.com/static/Widgets%2520in%2520WikiText.html]] can be specified several ways. Two ways are described here.
 
 !! Double curly brace attribute syntax
-
 One way is to add the code to a separate tiddler and pass the contents of that tiddler to the ``eve`` markdown attribute using the doubly curly brace syntax. This was done with the Tic-Tac-Toe example above and [[hello.eve]] is a simpler example of the same:
 
 ```
@@ -75,6 +74,7 @@ This renders as:
 * ''Persistence'' - Eve records tagged with the `#persist` will automatically be stored in tiddler fields as they change. Upon widget refresh, the fields will be loaded back into the eve program. See [[Storing eve state in tiddlers]] for details and a demo
 * ''SVG'' - [[svg clock]]
 *  ''Canvas'' - [[canvas demo]]
+* ''Split single Eve program across multiple tiddlers'' - [[flappy bird]] - shows how the `filter` attribute of the eve widget can be used to join multiple tiddlers together into a single Eve program. Editing a long program within a single tiddler can be unwieldy, so breaking them down into smaller chunks can be helpful. 
 
 ! Eve widget reference
 
@@ -82,6 +82,9 @@ The content of the `<$eve>` widget is ignored.
 
 |!Attribute |!Description |
 |markdown|The value of this attribute is used as eve source code|
+|filter |The text field of all the tiddlers matching this ~TiddlyWiki filter are concatenated and used as eve source code.|
+
+If both attributes are supplied, then source code from both are used.
 
 ---
 

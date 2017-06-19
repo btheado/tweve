@@ -1,0 +1,71 @@
+created: 20170618214835230
+creator: 0.0.0.0
+modified: 20170618215108575
+modifier: 0.0.0.0
+tags: flappy.eve
+title: flappy.eve/game menus
+type: text/vnd.tiddlywiki
+
+! Game menus
+
+These following blocks handle drawing the game's other screens (such as the main menu and the game over scene).
+
+The main menu displays a message instructing the player how to start the game.
+
+```
+search
+  [#world screen: "menu"]
+  svg = [#game-window]
+
+bind
+  svg.children += [#svg/text x: 50 y: 45 text-anchor: "middle" font-size: 6 text: "Click the screen to begin!" sort: 10]
+```
+
+The "game over" screen displays the final score of the last game, the high score of all games, and a message inviting the player to play the game again.
+
+```
+search
+  [#world screen: "game over" score best]
+  svg = [#game-window]
+
+bind
+  svg.children += [#svg/text x: 50 y: 30 text-anchor: "middle" font-size: 6 text: "Game Over :(" sort: 10]
+  svg.children += [#svg/text x: 50 y: 55 text-anchor: "middle" font-size: 6 text: "Score {{score}}" sort: 10]
+  svg.children += [#svg/text x: 50 y: 65 text-anchor: "middle" font-size: 6 text: "Best {{best}}" sort: 10]
+  svg.children += [#svg/text x: 50 y: 85 text-anchor: "middle" font-size: 4 text: "Click to play again!" sort: 10]
+```
+
+!! Score calculation
+
+We haven't calculated the score yet, so let's do that. We calculate the score as the `floor` of the distance, meaning we just round the distance down to the nearest integer. If the distance between pipes is changed, this value can be scaled to search.
+
+```
+search
+  world = [#world distance]
+
+bind
+  world.score := math/floor[value: distance]
+```
+
+!! Start a new game
+
+When the game is on the "menu" or "game over" screens, a click anywhere in the application will (re)start the game. Additionally, if the current score is better than the current best, we'll swap them out now. Along with starting the game, we make sure to reset the distance and player positions in the came of a restart.
+
+```
+search
+  world = [#world]
+  [#html/event/click]
+  ok = if world.screen = "menu" then "true"
+       else if world.screen = "game over" then "true"
+
+  new = if world.score > world.best then world.score
+        else world.best
+  player = [#player]
+
+commit
+  world.screen := "game"
+  world.distance := 0
+  world.best := new
+  player.y := 50
+  player.velocity := 0
+```

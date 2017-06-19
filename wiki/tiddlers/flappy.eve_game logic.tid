@@ -1,0 +1,106 @@
+created: 20170618215426729
+creator: 0.0.0.0
+modified: 20170618230425068
+modifier: 0.0.0.0
+tags: flappy.eve
+title: flappy.eve/game logic
+type: text/vnd.tiddlywiki
+
+! Game Logic
+
+Now we need some logic to actually play the game. We slide obstacles along proportional to the distance travelled, and wrap them around to the beginning once they're entirely off screen. Additionally, we only show obstacles once their distance travelled is positive. This allows us to offset a pipe in the future, without the modulo operator wrapping it around to start off halfway through the screen.
+
+!! Obstacles
+
+Every 2 distance a wild obstacle appears
+
+```
+search
+  [#world distance]
+  obstacle = [#obstacle offset]
+  obstacle-distance = distance + offset
+  obstacle-distance >= 0
+
+bind
+  obstacle.x := 100 - (50 * math/mod[value: obstacle-distance, by: 2])
+```
+
+When the obstacle is offscreen (`x > 90`), we randomly adjust the height of its gap to ensure the game doesn't play the same way twice. Eve's current random implementation yields a single result per seed per evaluation, so you can ask for `random[seed: "foo"]` in multiple queries and get the same result in that evaluation. In practice, this means that for every unique sample of randomness you care about in a program at a fixed time, you should use a unique seed. In this case, since we want one sample per obstacle, we just use the obstacle UUIDs as our seeds. The magic numbers in the equation just keep the gap from being at the very top of the screen or underground.
+
+Readjust the height of the gap every time the obstacle resets
+
+```
+search
+  [#time frame]
+  [#world screen: "game" frame != frame]
+  obstacle = [#obstacle x > 98]
+  height = random/number[seed: frame] * 30 + 5
+
+commit
+  obstacle.height := height
+```
+
+!! Flapping the player
+
+When a player clicks during gameplay, we give the bird some lift by setting its velocity.
+
+```
+search
+  [#html/event/click]
+  [#world screen: "game"]
+  player = [#player #self]
+
+commit
+  player.velocity := 1.17
+```
+
+!! Scroll the world
+
+Next, we scroll the world in time with frame updates. Eve is currently locked to 60fps updates here, but this will probably be configurable in the future. Importantly, we only want to update the world state once per frame, so to ensure that we note the offset of the frame we last computed in `world.frame` and ensure we’re not recomputing for the same offset.
+
+```
+search
+  [#time frame]
+  world = [#world screen: "game" frame != frame gravity]
+  player = [#player y velocity]
+  not([#html/event/click])
+
+commit
+  world.frame := frame
+  world.distance := world.distance + 1 / 60
+  player.y := y - velocity
+  player.velocity := velocity + gravity
+```
+
+!! Collision
+
+Checking collision with the ground is very simple. Since we know the y height of the ground, we just check if the player's bottom (determined by center + radius) is below that point.
+
+The game is lost if the player hits the ground.
+
+```
+search
+  world = [#world screen: "game"]
+  [#player y > 85] // ground height + player radius
+
+commit
+  world.screen := "game over"
+```
+
+Collision with the pipes is only slightly harder. Since they come in pairs, we first determine if the player is horizontally in a slice that may contain pipes and if so, whether we're above or below the gap. If neither, we're in the clear, otherwise we've collided.
+
+The game is lost if the player hits an `#obstacle`
+
+```
+search
+  world = [#world screen: "game"]
+  [#player x y]
+  [#obstacle x: obstacle-x height gap]
+  ∂x = math/absolute[value: obstacle-x + 5 - x] - 10 // distance between the edges of player and obstacle (offset of 1/2 obstacle width because origin is on the left)
+  ∂x < 0
+  collision = if y - 5 <= height then true
+              else if y + 5 >= gap + height then true
+
+commit
+  world.screen := "game over"
+```

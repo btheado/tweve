@@ -1,0 +1,15 @@
+created: 20170618214528890
+creator: 0.0.0.0
+modified: 20170619001533654
+modifier: 0.0.0.0
+tags: flappy.eve
+title: flappy.eve/introduction
+type: text/vnd.tiddlywiki
+
+The code here came from the eve-starter project at [[flappy.eve|https://github.com/witheve/eve-starter/blob/master/programs/flappy.eve]].
+
+When a player starts the game, we commit a `#world`, a `#player`, and some `#obstacles`. These will keep all of the essential state of the game. All of this information could have been stored on the world, but for clarity we break the important bits of state into objects that they effect.
+
+* The `#world` tracks the distance the player has travelled, the current game screen, and the high score.
+* The `#player` stores his current y position and (vertical) velocity.
+* The `obstacles` have their (horizontal) offset and gap widths. We put distance on the world and only keep two obstacles; rather than moving the player through the world, we keep the player stationary and move the world past the player. When an obstacle goes off screen, we will wrap it around, update the placement of its gap, and continue on.

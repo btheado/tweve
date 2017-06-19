@@ -1,0 +1,17 @@
+created: 20170618214457653
+creator: 0.0.0.0
+modified: 20170619001125256
+modifier: 0.0.0.0
+tags: 
+title: flappy.eve
+type: text/vnd.tiddlywiki
+
+<!-- Loop through all tiddlers with tag matching the name of this tiddler (flappy.eve) and transclude them here for viewing -->
+<$list filter="[!has[draft.of]tag{!!title}sort[created]]">
+
+----
+<$link to={{!!title}}>{{!!title}}</$link>
+{{||$:/core/ui/Buttons/edit}}
+
+{{!!text}}
+</$list>

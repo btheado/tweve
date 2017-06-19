@@ -1,0 +1,37 @@
+created: 20170618225303286
+creator: 0.0.0.0
+modified: 20170619003149550
+modifier: 0.0.0.0
+tags: 
+title: flappy bird
+type: text/vnd.tiddlywiki
+
+This example shows how the `filter` attribute can be used to construct an eve program from multiple tiddlers.  ~TiddlyWiki has a [[filter|http://tiddlywiki.com/static/Filters.html]] syntax which allows tiddlers to be queried in many ways.
+
+I chose to store the flappy bird souce code in tiddlers all tagged with the tag `flappy.eve`, The filter `tag[flappy.eve]` will return those tiddlers, so this eve widget call:
+
+```
+<$eve filter="[!has[draft.of]tag[flappy.eve]]" />
+```
+
+renders as
+
+<$eve filter="[!has[draft.of]tag[flappy.eve]]" />
+
+The `!has[draft.of]` portion of the filter avoids matching the tiddler while it is being edited.
+
+These are the tiddlers which match the `flappy.eve` tag:
+
+{{{[!has[draft.of]tag[flappy.eve]sort[created]]}}}
+
+In addition to using `flappy.eve` as a tag, I've also created it as a tiddler [[flappy.eve]]. The content I placed in that tiddler cause the content of all the `flappy.eve` tagged tiddlers to be displayed. The raw content of that tiddler looks like this:
+
+<pre>
+<$view tiddler=flappy.eve/>
+</pre>
+
+In this way the [[flappy.eve]] tiddler can be visited in order to view the entire program. There are countless ways to organize tiddlers and display tiddlers. Using tags is just one way.
+
+Using tags is a particularly powerful way when combined with the {{$:/core/ui/Buttons/new-here}} button. Clicking that button at the top of a tiddler causes a new tiddler to be created. This new tiddler is automatically tagged with the tiddler from which the button was clicked. This means you can create a new tiddler `myprogram.eve`, copy the above content and then click the {{$:/core/ui/Buttons/new-here}} button to start adding blocks of code in separate tiddlers.
+
+Having this separate `myprogram.eve` tiddler is a convenience only. In order to run the code from the separate tiddlers all you need is the `<$eve filter="[!has[draft.of]tag[flappy.eve]]" />` widget call.
