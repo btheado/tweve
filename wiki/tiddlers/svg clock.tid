@@ -1,6 +1,6 @@
 created: 20170611221450475
 creator: 0.0.0.0
-modified: 20170617140654112
+modified: 20170618233700128
 modifier: 0.0.0.0
 tags: 
 title: svg clock
@@ -14,6 +14,8 @@ renders as
 
 <$eve markdown={{clock.eve}}/>
 
-The code from [[clock.eve]]:
+The contents of the [[clock.eve]] tiddler:
+
+---
 
 {{clock.eve}}

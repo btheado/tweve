@@ -72,9 +72,16 @@ This renders as:
 
 ! More features and examples
 
-* ''Persistence'' - Eve records tagged with the `#persist` will automaticlly be stored in tiddler fields as they change. Upon widget refresh, the fiels will be loaded back into the eve program. See [[Storing eve state in tiddlers]] for details and a demo
+* ''Persistence'' - Eve records tagged with the `#persist` will automatically be stored in tiddler fields as they change. Upon widget refresh, the fields will be loaded back into the eve program. See [[Storing eve state in tiddlers]] for details and a demo
 * ''SVG'' - [[svg clock]]
 *  ''Canvas'' - [[canvas demo]]
+
+! Eve widget reference
+
+The content of the `<$eve>` widget is ignored.
+
+|!Attribute |!Description |
+|markdown|The value of this attribute is used as eve source code|
 
 ---
 
