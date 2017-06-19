@@ -64,7 +64,10 @@ class EveWidget extends Widget {
       for (let title of tiddlers) {
         let tiddler = this.wiki.getTiddler(title);
         if (tiddler) {
-          eveSource += tiddler.getFieldString("text");
+          // Insert carriage return in case previous tiddler didn't end in one.
+          // Otherwise ending code block mark (```) might end up on the same
+          // line as the first line of the next tiddler, thereby giving syntax error.
+          eveSource += "\n" + tiddler.getFieldString("text");
         }
       }
     }
