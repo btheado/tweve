@@ -39,7 +39,19 @@ class EveWidget extends Widget {
 
     // Define the eve program
     this.eveSource = this.getEveSource(this.getAttribute("markdown"), this.getAttribute("filter"));
-    this.prog.load(this.eveSource);
+    for (let source of this.eveSource) {
+      try {
+        this.prog.load(source);
+      } catch (ex) {
+        let errorNode = $tw.utils.domMaker('div', {
+          document: this.document,
+          class: 'eve-compiler-error-message',
+          text: ex.message
+        });
+        parent.insertBefore(errorNode, nextSibling);
+        this.domNodes.push(errorNode);
+      }
+    }
 
     // Attach a watcher for persisting data. Only if the user gave a
     // tiddler in which the data should be saved
@@ -55,19 +67,16 @@ class EveWidget extends Widget {
   }
 
   getEveSource(markdown, filter) {
-    var eveSource = "";
+    var eveSource = [];
     if (markdown) {
-      eveSource += markdown;
+      eveSource.push(markdown);
     }
     if (filter) {
       let tiddlers = this.wiki.filterTiddlers(filter,this);
       for (let title of tiddlers) {
         let tiddler = this.wiki.getTiddler(title);
         if (tiddler) {
-          // Insert carriage return in case previous tiddler didn't end in one.
-          // Otherwise ending code block mark (```) might end up on the same
-          // line as the first line of the next tiddler, thereby giving syntax error.
-          eveSource += "\n" + tiddler.getFieldString("text");
+          eveSource.push(tiddler.getFieldString("text"));
         }
       }
     }
@@ -75,7 +84,7 @@ class EveWidget extends Widget {
     // Append an eve block to the end so any root-less html elements
     // will automatically be attached to the widget rather than to
     // the document body. Code compliments of Josh Cole.
-    eveSource += `
+    eveSource.push(`
 Any element with no parent (or that is already a child of the widget root) is parented to the widget root.
 ~~~
       search
@@ -97,7 +106,7 @@ a root element, adding it as a child of the widget. Doing so would make it no
 longer match, so it would stop being a child. This would allow it to match
 again, ad infinitum. Instead, we include the loophole that, if an element's
 parent is already the widget, we'll continue asserting that.
-    `;
+    `);
 
     return eveSource;
   }
@@ -236,7 +245,7 @@ parent is already the widget, we'll continue asserting that.
   refresh(changedTiddlers) {
     // Refresh if the input sourcecode has changed
     this.computeAttributes();
-    if(this.eveSource != this.getEveSource(this.getAttribute("markdown"), this.getAttribute("filter"))) {
+    if(this.eveSource.join("\n") != this.getEveSource(this.getAttribute("markdown"), this.getAttribute("filter")).join("\n")) {
       // Source code has changed, so regenerate and rerender the widget and replace the existing DOM node
       this.prog.clear();
       this.refreshSelf();
