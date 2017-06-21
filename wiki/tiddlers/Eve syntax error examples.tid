@@ -1,0 +1,38 @@
+created: 20170617143308589
+creator: 0.0.0.0
+modified: 20170621014443448
+modifier: 0.0.0.0
+title: Eve syntax error examples
+type: text/vnd.tiddlywiki
+
+Here are some code blocks, most containing errors:
+
+<pre><code>
+<$view tiddler="Miscellaneous Eve errors" format=text/>
+</code></pre>
+
+It renders as:
+
+<$eve markdown={{Miscellaneous Eve errors}}/>
+
+---
+
+Here are some examples where the eve parser currently throws an exception
+
+<pre><code>
+<$view tiddler="Parser exception 1" format=text/>
+</code></pre>
+
+renders as:
+
+<$eve markdown={{Parser exception 1}}/>
+
+---
+
+<pre><code>
+<$view tiddler="Parser exception 2" format=text/>
+</code></pre>
+
+renders as:
+
+<$eve markdown={{Parser exception 2}}/>

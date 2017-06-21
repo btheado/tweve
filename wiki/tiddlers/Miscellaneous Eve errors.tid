@@ -1,0 +1,41 @@
+created: 20170621012058063
+creator: 0.0.0.0
+modified: 20170621013019887
+modifier: 0.0.0.0
+tags: error example
+title: Miscellaneous Eve errors
+type: text/vnd.tiddlywiki
+
+
+```
+commit
+  // This isn't an error...the block just doesn't match
+  [#ui/div text: "Undefined variable here:" undefined_variable]
+```
+
+```
+commit
+  a=5
+  [#ui/div text: "invalid assignment in a commit"]
+```
+
+```
+search
+  a = math/sin[degrees: "not a number"]
+bind
+  [#ui/div text: "sin of a string: {{a}}"]
+```
+
+```
+search
+  a = 1
+bind
+  a <- 2
+```
+
+```
+search
+  *
+bind
+  [#ui/div text: a]
+```

@@ -46,7 +46,7 @@ class EveWidget extends Widget {
         let errorNode = $tw.utils.domMaker('div', {
           document: this.document,
           class: 'eve-compiler-error-message',
-          text: ex.message
+          text: 'Parser exception: ' + ex.message
         });
         parent.insertBefore(errorNode, nextSibling);
         this.domNodes.push(errorNode);

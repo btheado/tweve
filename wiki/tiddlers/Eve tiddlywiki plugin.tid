@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170619005959146
+modified: 20170621014102686
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -74,7 +74,8 @@ This renders as:
 * ''Persistence'' - Eve records tagged with the `#persist` will automatically be stored in tiddler fields as they change. Upon widget refresh, the fields will be loaded back into the eve program. See [[Storing eve state in tiddlers]] for details and a demo
 * ''SVG'' - [[svg clock]]
 *  ''Canvas'' - [[canvas demo]]
-* ''Split single Eve program across multiple tiddlers'' - [[flappy bird]] - shows how the `filter` attribute of the eve widget can be used to join multiple tiddlers together into a single Eve program. Editing a long program within a single tiddler can be unwieldy, so breaking them down into smaller chunks can be helpful. 
+* ''Split single Eve program across multiple tiddlers'' - [[flappy bird]] - shows how the `filter` attribute of the eve widget can be used to join multiple tiddlers together into a single Eve program. Editing a long program within a single tiddler can be unwieldy, so breaking them down into smaller chunks can be helpful.
+* [[Eve syntax error examples]]
 
 ! Eve widget reference
 
