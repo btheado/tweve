@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170621014102686
+modified: 20170621015627752
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -86,9 +86,3 @@ The content of the `<$eve>` widget is ignored.
 |filter |The text field of all the tiddlers matching this ~TiddlyWiki filter are concatenated and used as eve source code.|
 
 If both attributes are supplied, then source code from both are used.
-
----
-
-Improvements needed:
-
-* Better error handling - the eve widget code isn't currently catching any errors, resulting in the big, red "Internal ~JavaScript Error" ~TiddlyWiki error dialog box.
