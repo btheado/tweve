@@ -1,6 +1,6 @@
 created: 20170604124615774
 creator: 0.0.0.0
-modified: 20170611122401756
+modified: 20170623015526162
 modifier: 0.0.0.0
 tags: 
 title: counter.eve
@@ -36,15 +36,18 @@ commit
 
 For every `#counter`, we create a `#ui/row` that contains the elements that draw the counter. These rows are added automatically to the root of the DOM, but you could add them to a particular element instead adding them as children to the parent's record.
 
+There is an "issue" with Eve which causes html events to be sent to all Eve program instances. See https://github.com/witheve/Eve/issues/844 for further discussion. Using the `#program` is one of the workarounds proposed there. It is only needed for tweve since multiple instances of the same program are being instantiated here. For a standalone eve program, it would not be necessary.
+
 ```
 search
+  program = [#program]
   counter = [#counter count]
 
 bind
     [#ui/row counter sort: counter.sort style: [flex: "0 0 auto" width: "100px"] children:
-      [#ui/button text: "-" diff: -1 counter]
+      [#ui/button program text: "-" diff: -1 counter]
       [#ui/text text: count counter style: [padding: "0 6px" flex: 1 text-align: "right"]]
-      [#ui/button text: "+" diff: 1 counter]]
+      [#ui/button program text: "+" diff: 1 counter]]
 ```
 
 Add some counters programatically. To make `n` unique and independent counters, we need to add something to the committed counter that makes it unique. Since `sort` = `{1, 2, 3, 4}`, when we add it to the counter record we get 4 different counters. As an added bonus, we can use it to choose what order to display our counters in. We also add one `#fancy` counter, which is a standard counter with new styling.

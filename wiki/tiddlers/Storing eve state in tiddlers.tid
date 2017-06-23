@@ -1,6 +1,6 @@
 created: 20170611114702146
 creator: 0.0.0.0
-modified: 20170617142630823
+modified: 20170623015418078
 modifier: 0.0.0.0
 tags: 
 title: Storing eve state in tiddlers
@@ -68,5 +68,3 @@ The `#persist` tag is added to the `#counter` records and also the `not([#counte
 ---
 
 ''Note'': I haven't tested this functionality much yet, so it is likely far from perfect.
-
-''Note'': There is an "issue" with Eve which causes html events to be sent to all Eve program instances. This causes counters in both instances of the counter program above to increment and decrement even though buttons from only one of them are incrementing. See https://github.com/witheve/Eve/issues/844 for a discussion.

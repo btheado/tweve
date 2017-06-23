@@ -5,6 +5,7 @@ import "witheve-watchers/html"
 import "witheve-watchers/svg"
 import "witheve-watchers/system"
 import "witheve-watchers/ui"
+import {v4 as uuid} from "uuid";
 import { Program } from "witheve";
 
 import { widget as Widget } from '$:/core/modules/widgets/widget.js';
@@ -64,6 +65,10 @@ class EveWidget extends Widget {
     // addExternalRoot must come after the program is defined
     // or it won't work
     htmlWatcher.addExternalRoot("tw-widget-root", this.domNode);
+
+    // Add unique program record to help disambiguate html events
+    // See https://github.com/witheve/Eve/issues/844
+    this.prog.inputEAVs([[uuid(), "tag", "program"]]);
   }
 
   getEveSource(markdown, filter) {
