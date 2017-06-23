@@ -1,6 +1,6 @@
 created: 20170617143308589
 creator: 0.0.0.0
-modified: 20170621014443448
+modified: 20170623020236033
 modifier: 0.0.0.0
 title: Eve syntax error examples
 type: text/vnd.tiddlywiki
@@ -17,7 +17,7 @@ It renders as:
 
 ---
 
-Here are some examples where the eve parser currently throws an exception
+<!-- These used to be parser exceptions but were fixed by https://github.com/witheve/Eve/pull/848 -->
 
 <pre><code>
 <$view tiddler="Parser exception 1" format=text/>
