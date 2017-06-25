@@ -1,6 +1,6 @@
 created: 20170618215426729
 creator: 0.0.0.0
-modified: 20170618230425068
+modified: 20170625120224543
 modifier: 0.0.0.0
 tags: flappy.eve
 title: flappy.eve/game logic
@@ -31,10 +31,10 @@ Readjust the height of the gap every time the obstacle resets
 
 ```
 search
-  [#time frame]
-  [#world screen: "game" frame != frame]
+  [#time tick]
+  [#world screen: "game" tick != tick]
   obstacle = [#obstacle x > 98]
-  height = random/number[seed: frame] * 30 + 5
+  height = random/number[seed: tick] * 30 + 5
 
 commit
   obstacle.height := height
@@ -60,13 +60,13 @@ Next, we scroll the world in time with frame updates. Eve is currently locked to
 
 ```
 search
-  [#time frame]
-  world = [#world screen: "game" frame != frame gravity]
+  [#time tick]
+  world = [#world screen: "game" tick != tick gravity]
   player = [#player y velocity]
   not([#html/event/click])
 
 commit
-  world.frame := frame
+  world.tick := tick
   world.distance := world.distance + 1 / 60
   player.y := y - velocity
   player.velocity := velocity + gravity

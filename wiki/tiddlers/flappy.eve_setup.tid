@@ -1,6 +1,6 @@
 created: 20170618214528899
 creator: 0.0.0.0
-modified: 20170618231554984
+modified: 20170625115636196
 modifier: 0.0.0.0
 tags: flappy.eve
 title: flappy.eve/setup
@@ -13,7 +13,7 @@ Add a flappy eve and a world for it to flap in:
 ```
 commit
   [#player #self name: "eve" x: 25 y: 50 velocity: 0]
-  [#world screen: "menu" frame: 0 distance: 0 best: 0 gravity: -0.061]
+  [#world screen: "menu" tick: 0 distance: 0 best: 0 gravity: -0.061]
   [#obstacle gap: 35 offset: 0]
   [#obstacle gap: 35 offset: -1]
 
