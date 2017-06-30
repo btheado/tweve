@@ -28,6 +28,13 @@ module.exports = {
     ]
   },
 
+  // Without this, am getting:
+  //   ERROR in ./~/witheve/build/src/watchers/file.js
+  //   Module not found: Error: Can't resolve 'fs'
+  node: {
+    fs: 'empty'
+  },
+
   externals: {
     // This will be provided by TiddlyWiki, so tell webpack not to look for it
     '$:/core/modules/widgets/widget.js': {commonjs: '$:/core/modules/widgets/widget.js'}
