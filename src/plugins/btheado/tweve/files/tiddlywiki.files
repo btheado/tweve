@@ -17,6 +17,50 @@
         "title": "$:/plugins/btheado/eve/eve-widget.js",
         "module-type": "widget"
       }
+    },
+    {
+      "file": "codemirror_addon_mode_eve-mode.js",
+      "fields": {
+        "module-type": "library",
+        "title": "$:/plugins/tiddlywiki/codemirror/addon/mode/eve-mode.js",
+        "type": "application/javascript"
+      }
+    },
+
+    {
+      "file": "codemirror_addon_mode_overlay.js",
+      "fields": {
+        "module-type": "library",
+        "title": "$:/plugins/tiddlywiki/codemirror/addon/mode/overlay.js",
+        "type": "application/javascript"
+      }
+    },
+
+    {
+      "file": "codemirror_addon_mode_simple.js",
+      "fields": {
+        "module-type": "library",
+        "title": "$:/plugins/tiddlywiki/codemirror/addon/mode/simple.js",
+        "type": "application/javascript"
+      }
+    },
+
+    {
+      "file": "codemirror_eve-mode.css",
+      "fields": {
+        "tags": "$:/tags/Stylesheet",
+        "title": "$:/plugins/tiddlywiki/codemirror/eve-mode.css",
+        "type": "text/css"
+      }
+    },
+
+    {
+      "file": "codemirror_mode_gfm_gfm.js",
+      "fields": {
+        "module-type": "library",
+        "title": "$:/plugins/tiddlywiki/codemirror/mode/gfm/gfm.js",
+        "type": "application/javascript"
+      }
     }
   ]
 }
