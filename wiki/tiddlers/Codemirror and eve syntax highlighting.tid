@@ -1,0 +1,59 @@
+created: 20170630235042386
+creator: 0.0.0.0
+modified: 20170701002401773
+modifier: 0.0.0.0
+title: Codemirror and eve syntax highlighting
+type: text/x-gfm
+
+**TLDR** - This is a work in progress. Edit this tiddler and you will see nice syntax highlighting of markdown and Eve syntax. However, in view mode it does not render well. If that doesn't bother you, create a tiddler with `type=text/x-gfm` and you will get the syntax highlighting in edit mode.
+
+Details
+
+* TiddlyWiki has its own wiki syntax which is not generally compatible with markdown
+* TiddlyWiki has a [markdown plugin](http://tiddlywiki.com/plugins/tiddlywiki/markdown/) for rendering tiddlers as markdown if the type is set as text/x-markdown
+* TiddlyWiki has a [codemirror plugin](http://tiddlywiki.com/plugins/tiddlywiki/codemirror/) which can replace the text box used for editing tiddler body text
+* Codemirror supports syntax highlighting and an [eve mode](https://github.com/witheve/codemirror-mode-eve) has been written.
+* Typed code blocks (in which eve code can be syntax highlighted) are mainly only available in GFM (Github flavored markdown).
+* If the tiddler has `type=text/x-gfm`, then the nice eve syntax highlighting will be used in edit mode.
+* However, the markdown plugin will not be used for rendering `text/x-gfm` so in view mode, this tiddler will look bad. Even if it did render `text/x-gfm` it would not look good because the supported markdown flavors do not support the typed code blocks
+* The likely solution to this is to create my own markdown wrapper using a library which supports GFM (likely https://markdown-it.github.io/).
+
+```eve
+search
+  a = 1
+bind
+  [#ui/div text: "hi"]
+```
+
+
+**nols**
+
+_italics_
+straight
+*italics*
+
+[I'm an inline-style link](https://www.google.com)
+
+inline `code` has `back-ticks around` it.
+
+
+```
+No language indicated, so no syntax highlighting. 
+But let's throw in a <b>tag</b>.
+```
+
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+Alternatively, for H1 and H2, an underline-ish style:
+
+Alt-H1
+======
+
+Alt-H2
+------
+

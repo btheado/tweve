@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170621015627752
+modified: 20170630234937202
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -76,6 +76,7 @@ This renders as:
 *  ''Canvas'' - [[canvas demo]]
 * ''Split single Eve program across multiple tiddlers'' - [[flappy bird]] - shows how the `filter` attribute of the eve widget can be used to join multiple tiddlers together into a single Eve program. Editing a long program within a single tiddler can be unwieldy, so breaking them down into smaller chunks can be helpful.
 * [[Eve syntax error examples]]
+* [[Codemirror and eve syntax highlighting]] - work in progress
 
 ! Eve widget reference
 
