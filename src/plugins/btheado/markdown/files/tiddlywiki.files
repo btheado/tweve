@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "markdown-it.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/btheado/markdown/markdown-it.js",
+				"module-type": "library"
+			}
+		}
+	]
+}

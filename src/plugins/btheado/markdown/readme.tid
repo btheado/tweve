@@ -1,0 +1,5 @@
+title: $:/plugins/btheado/markdown/readme
+
+This is a TiddlyWiki plugin for parsing Markdown text, based on the [[markdown-it|https://github.com/markdown-it/markdown-it]] project.
+
+[[Source code|https://github.com/btheado/tweve/blob/master/src/plugins/btheado/markdown]]
