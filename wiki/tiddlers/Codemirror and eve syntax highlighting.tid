@@ -1,11 +1,18 @@
 created: 20170630235042386
 creator: 0.0.0.0
-modified: 20170701002401773
+modified: 20170704193109200
 modifier: 0.0.0.0
 title: Codemirror and eve syntax highlighting
 type: text/x-gfm
 
-**TLDR** - This is a work in progress. Edit this tiddler and you will see nice syntax highlighting of markdown and Eve syntax. However, in view mode it does not render well. If that doesn't bother you, create a tiddler with `type=text/x-gfm` and you will get the syntax highlighting in edit mode.
+Create a tiddler with `type=text/x-gfm` and in view mode, the github flavored markdown contents will be rendered. In edit mode the codemirror plugin will be used to provide syntax highlighting for the markdown and for the Eve code stored inside code blocks.
+
+With this standard Eve programs can be pasted in and they will be rednered nicely without having to change to the TiddlyWiki markup syntax.
+
+TODO
+
+1. Add the highlightjs plugin and add support for highighting Eve code. The eve code is currently only has syntax highlighting in edit mode and not view mode.
+2. In view mode, looks like html special characters are being escaped inside of code blocks. Ugh.
 
 Details
 
@@ -16,7 +23,7 @@ Details
 * Typed code blocks (in which eve code can be syntax highlighted) are mainly only available in GFM (Github flavored markdown).
 * If the tiddler has `type=text/x-gfm`, then the nice eve syntax highlighting will be used in edit mode.
 * However, the markdown plugin will not be used for rendering `text/x-gfm` so in view mode, this tiddler will look bad. Even if it did render `text/x-gfm` it would not look good because the supported markdown flavors do not support the typed code blocks
-* The likely solution to this is to create my own markdown wrapper using a library which supports GFM (likely https://markdown-it.github.io/).
+* As a solution for this, I created my own markdown wrapper using the https://markdown-it.github.io/ library which supports GFM.
 
 ```eve
 search
@@ -56,4 +63,17 @@ Alt-H1
 
 Alt-H2
 ------
+
+Tables are supported:
+
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+Images also:
+
+![Minion](https://octodex.github.com/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
 
