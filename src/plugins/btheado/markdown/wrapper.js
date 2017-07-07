@@ -14,6 +14,7 @@ Wraps up the markdown-it parser for use in TiddlyWiki5
 
 var markdown = require("$:/plugins/btheado/markdown/markdown-it.js");
 var WikiParser = require("$:/core/modules/parsers/wikiparser/wikiparser.js")["text/vnd.tiddlywiki"];
+var hljs = require("$:/plugins/tiddlywiki/highlight/highlight.js");
 
 /*
  * The TW markdown parser at http://tiddlywiki.com/plugins/tiddlywiki/markdown/ uses the markdown-js library
@@ -27,10 +28,28 @@ var WikiParser = require("$:/core/modules/parsers/wikiparser/wikiparser.js")["te
  * be able to handle most everything which comes out of the markdown parse.
  */
 var MarkdownParser = function(type,text,options) {
+  var md, html, myparser;
+  if (hljs) {
+    md = new markdown({
+      "highlight": function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+          try {
+            return '<pre class="hljs"><code>' +
+                   hljs.highlight(lang, str, true).value +
+                   '</code></pre>';
+          } catch (__) {}
+        }
+
+        return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+      }
+    });
+  } else {
+    md = new markdown();
+  }
+
   // Render the markdown to html and create a TW parser
-  var md = new markdown(),
-      html = md.render(text),
-      myparser = Object.create(WikiParser.prototype);
+  html = md.render(text),
+  myparser = Object.create(WikiParser.prototype);
 
   // Remove everything except for html parsing
   myparser.pragmaRuleClasses = {};

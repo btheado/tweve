@@ -3,3 +3,5 @@ title: $:/plugins/btheado/markdown/usage
 Create tiddler with type=x-gfm and the markdown contents will be rendered
 
 See https://markdown-it.github.io/ for information on the supported markdown
+
+This plugin depends on the highlightjs plugin being installed.

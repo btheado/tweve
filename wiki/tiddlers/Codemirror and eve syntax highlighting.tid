@@ -1,6 +1,6 @@
 created: 20170630235042386
 creator: 0.0.0.0
-modified: 20170704193109200
+modified: 20170707031133448
 modifier: 0.0.0.0
 title: Codemirror and eve syntax highlighting
 type: text/x-gfm
@@ -11,7 +11,7 @@ With this standard Eve programs can be pasted in and they will be rednered nicel
 
 TODO
 
-1. Add the highlightjs plugin and add support for highighting Eve code. The eve code is currently only has syntax highlighting in edit mode and not view mode.
+1. Add highlightjs support for highighting Eve code. The eve code currently only has syntax highlighting in edit mode and not view mode.
 2. In view mode, looks like html special characters are being escaped inside of code blocks. Ugh.
 
 Details
@@ -32,6 +32,13 @@ bind
   [#ui/div text: "hi"]
 ```
 
+```javascript
+var foo = function (bar) {
+  return bar++;
+};
+
+console.log(foo(5));
+```
 
 **nols**
 
