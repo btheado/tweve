@@ -1,6 +1,6 @@
 created: 20170630235042386
 creator: 0.0.0.0
-modified: 20170707031133448
+modified: 20170709014028824
 modifier: 0.0.0.0
 title: Codemirror and eve syntax highlighting
 type: text/x-gfm
@@ -9,10 +9,7 @@ Create a tiddler with `type=text/x-gfm` and in view mode, the github flavored ma
 
 With this standard Eve programs can be pasted in and they will be rednered nicely without having to change to the TiddlyWiki markup syntax.
 
-TODO
-
-1. Add highlightjs support for highighting Eve code. The eve code currently only has syntax highlighting in edit mode and not view mode.
-2. In view mode, looks like html special characters are being escaped inside of code blocks. Ugh.
+**TODO**: Add highlightjs support for highighting Eve code. The eve code currently only has syntax highlighting in edit mode and not view mode.
 
 Details
 
@@ -38,6 +35,9 @@ var foo = function (bar) {
 };
 
 console.log(foo(5));
+
+var a = "abc123", b = "<br/>"
+
 ```
 
 **nols**
