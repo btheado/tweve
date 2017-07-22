@@ -61,6 +61,15 @@
         "title": "$:/plugins/tiddlywiki/codemirror/mode/gfm/gfm.js",
         "type": "application/javascript"
       }
+    },
+
+    {
+      "file": "codemirror_addon_runmode_runmode.js",
+      "fields": {
+        "module-type": "library",
+        "title": "$:/plugins/tiddlywiki/codemirror/addon/runmode/runmode.js",
+        "type": "application/javascript"
+      }
     }
   ]
 }

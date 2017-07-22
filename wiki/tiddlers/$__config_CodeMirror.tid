@@ -1,6 +1,6 @@
 created: 20170625214001114
 creator: 0.0.0.0
-modified: 20170625214004056
+modified: 20170722152705308
 modifier: 0.0.0.0
 tags: 
 title: $:/config/CodeMirror
@@ -12,6 +12,7 @@ type: application/json
       "$:/plugins/tiddlywiki/codemirror/addon/mode/overlay.js",
       "$:/plugins/tiddlywiki/codemirror/mode/gfm/gfm.js",
       "$:/plugins/tiddlywiki/codemirror/addon/mode/eve-mode.js",
+      "$:/plugins/tiddlywiki/codemirror/addon/runmode/runmode.js",
 
       "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
       "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",

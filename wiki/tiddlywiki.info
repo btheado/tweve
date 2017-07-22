@@ -1,7 +1,6 @@
 {
   "plugins": [
     "tiddlywiki/codemirror",
-    "tiddlywiki/highlight",
     "btheado/markdown",
     "tiddlywiki/filesystem",
     "btheado/tweve"
