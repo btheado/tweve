@@ -1,6 +1,6 @@
 created: 20170605015855313
 creator: 0.0.0.0
-modified: 20170630215547302
+modified: 20170722214759114
 modifier: 0.0.0.0
 tags: 
 title: tic-tac-toe.eve
@@ -25,7 +25,7 @@ To begin, we initialize the board. We commit a `#board` record to hold our globa
 The game board is square, with a given size. It contains size ^ 2 cells,
 each with a row and column index.
 
-```
+```eve
 search
   // board constants
   size = 3
@@ -44,7 +44,7 @@ A subtlety here is the last line, [#cell board row: i column: j]. Thanks to our 
 
 Now we tag some special cell groupings: diagonal and anti-diagonal cells. The diagonal cells are `(1, 1)`, `(2, 2)`, and `(3, 3)`. From this we can see that diagonal cells have a row index equal to its column index
 
-```
+```eve
 search
   cells = [#cell row column]
   row = column
@@ -58,7 +58,7 @@ Similarly, the anti-diagonal cells are `(1, 3)`, `(2, 2)`, and `(3, 1)`.
 Anti-diagonal cells satisfy the equation `row + col = N + 1`,
 where `N` is the size of the board.
 
-```
+```eve
   search
     cells = [#cell row column]
     [#board size: N]
@@ -73,7 +73,7 @@ where `N` is the size of the board.
 A game is won when a player marks N cells in a row, column, or diagonal.
 The game can end in a tie, where no player has N in a row.
 
-```
+```eve
 search
   board = [#board size: N, not(winner)]
   (winner, winning-cell) =
@@ -111,7 +111,7 @@ Then update the cell to reflect its new owner, and switch board's player to the 
 
 Click on a cell to make your move
 
-```
+```eve
 search
   [#html/event/click target: [#ui/div cell]]
   // Ensures the cell hasn't been played
@@ -137,7 +137,7 @@ A reset consists of:
 - Clearing all of the cells
 - Removing the #winner tag from the winning cell set
 
-```
+```eve
 search
   [#html/event/click element: [#ui/div board]]
   board = [#board winner]
@@ -155,7 +155,7 @@ We've implemented the game logic, but now we need to actually draw the board so 
 
 !!! Draw the board
 
-```
+```eve
 search
   board = [#board]
   cell = [#cell board row column]
@@ -173,7 +173,7 @@ bind
 
 Winning cells are drawn in a different color
 
-```
+```eve
 search
   winning-cell = [#cell #winner]
   cell-elements = [#ui/div cell: winning-cell style]
@@ -188,7 +188,7 @@ Finally, we fill the previously mentioned #status div with our current game stat
 
 Display the current player if the game isn't won
 
-```
+```eve
 search
   status = [#status board]
   not(board.winner)
@@ -199,7 +199,7 @@ bind
 
 When the game is won, display the winner
 
-```
+```eve
 search
   status = [#status board]
   winner = board.winner

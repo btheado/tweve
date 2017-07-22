@@ -1,12 +1,12 @@
 created: 20170621013311514
 creator: 0.0.0.0
-modified: 20170621013323479
+modified: 20170722214534179
 modifier: 0.0.0.0
 tags: example error
 title: Parser exception 2
 type: text/vnd.tiddlywiki
 
-```
+```eve
 bind
   [#ui/div text: "missing quote]
 ```

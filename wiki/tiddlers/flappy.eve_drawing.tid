@@ -1,6 +1,6 @@
 created: 20170618215214944
 creator: 0.0.0.0
-modified: 20170618215800375
+modified: 20170722213730750
 modifier: 0.0.0.0
 tags: flappy.eve
 title: flappy.eve/drawing
@@ -14,7 +14,7 @@ Next we draw the `#player` at its (x,y) coordinates. Since the player is station
 
 Draw the player
 
-```
+```eve
 search
   svg = [#game-window]
   player = [#player x y]
@@ -32,7 +32,7 @@ Drawing obstacles is much the same process as drawing the player, but we encapsu
 
 Draw the obstacles
 
-```
+```eve
 search
   svg = [#game-window]
   obstacle = [#obstacle x height gap]

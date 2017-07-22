@@ -1,6 +1,6 @@
 created: 20170604124615774
 creator: 0.0.0.0
-modified: 20170623015526162
+modified: 20170722213615743
 modifier: 0.0.0.0
 tags: 
 title: counter.eve
@@ -24,7 +24,7 @@ Each button uses the referenced counter to increment itself. We need to think ab
 * `#html/event/click` is a record created by the HTML watcher any time a user clicks somewhere within an Eve app.
 * `#ui/button` is a record we'll create a little later on to represent our button. The UI Watcher will helpfully draw it as a graphical button for us.
 
-```
+```eve
 search
   [#html/event/click element: [#ui/button diff counter]]
 
@@ -38,7 +38,7 @@ For every `#counter`, we create a `#ui/row` that contains the elements that draw
 
 There is an "issue" with Eve which causes html events to be sent to all Eve program instances. See https://github.com/witheve/Eve/issues/844 for further discussion. Using the `#program` is one of the workarounds proposed there. It is only needed for tweve since multiple instances of the same program are being instantiated here. For a standalone eve program, it would not be necessary.
 
-```
+```eve
 search
   program = [#program]
   counter = [#counter count]
@@ -52,7 +52,7 @@ bind
 
 Add some counters programatically. To make `n` unique and independent counters, we need to add something to the committed counter that makes it unique. Since `sort` = `{1, 2, 3, 4}`, when we add it to the counter record we get 4 different counters. As an added bonus, we can use it to choose what order to display our counters in. We also add one `#fancy` counter, which is a standard counter with new styling.
 
-```
+```eve
 search
   sort = math/range[start: 1 stop: 2]
   not([#counter sort: s count: c])
@@ -66,7 +66,7 @@ commit
 
 This block says: "For every rows with a counter that is tagged fancy, add a style with a black background and pink text". Let's break it down. We search for all `#ui/row`s with a counter attribute. The counter is constrained to be only counters with a `#fancy` tag. Then we bind a new style to each.
 
-```
+```eve
 search
   container = [#ui/row counter]
   counter.tag = "fancy"

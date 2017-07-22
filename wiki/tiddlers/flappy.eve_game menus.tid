@@ -1,6 +1,6 @@
 created: 20170618214835230
 creator: 0.0.0.0
-modified: 20170618215108575
+modified: 20170722214140250
 modifier: 0.0.0.0
 tags: flappy.eve
 title: flappy.eve/game menus
@@ -12,7 +12,7 @@ These following blocks handle drawing the game's other screens (such as the main
 
 The main menu displays a message instructing the player how to start the game.
 
-```
+```eve
 search
   [#world screen: "menu"]
   svg = [#game-window]
@@ -23,7 +23,7 @@ bind
 
 The "game over" screen displays the final score of the last game, the high score of all games, and a message inviting the player to play the game again.
 
-```
+```eve
 search
   [#world screen: "game over" score best]
   svg = [#game-window]
@@ -39,7 +39,7 @@ bind
 
 We haven't calculated the score yet, so let's do that. We calculate the score as the `floor` of the distance, meaning we just round the distance down to the nearest integer. If the distance between pipes is changed, this value can be scaled to search.
 
-```
+```eve
 search
   world = [#world distance]
 
@@ -51,7 +51,7 @@ bind
 
 When the game is on the "menu" or "game over" screens, a click anywhere in the application will (re)start the game. Additionally, if the current score is better than the current best, we'll swap them out now. Along with starting the game, we make sure to reset the distance and player positions in the came of a restart.
 
-```
+```eve
 search
   world = [#world]
   [#html/event/click]

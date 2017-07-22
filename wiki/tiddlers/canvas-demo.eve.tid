@@ -1,6 +1,6 @@
 created: 20170617134509013
 creator: 0.0.0.0
-modified: 20170618030516265
+modified: 20170722213502799
 modifier: 0.0.0.0
 tags: 
 title: canvas-demo.eve
@@ -40,7 +40,7 @@ and things that don't into separate paths, as the Canvas API requires rerenderin
 
 An example container is a div with a title
 
-```
+```eve
 search
   container = [#container]
 bind
@@ -49,7 +49,7 @@ bind
 
 Draw a simple square.
 
-```
+```eve
 search
   example = "Square"
 bind
@@ -61,7 +61,7 @@ bind
 
 Draw a compound path
 
-```
+```eve
 search
   example = "Compound path"
 bind
@@ -75,7 +75,7 @@ bind
 
 Draw a canvas with multiple paths.
 
-```
+```eve
 search
   example = "Multiple paths"
 bind
@@ -93,7 +93,7 @@ bind
 
 Reusable equilateral triangle path block.
 
-```
+```eve
 search
   triangle = [#triangle x y side]
   adjacent = side * math/cos[degrees: 30]
@@ -107,7 +107,7 @@ bind
 
 Draw a canvas with a reusable path component.
 
-```
+```eve
 search
   example = "Reusable path component"
 bind
@@ -124,7 +124,7 @@ bind
 
 Add some CSS to spruce the place up. The flex-direction part doesn't seem to be working. Not sure why
 
-```
+```eve
 bind
   [#html/element tagname: "style" text: "
       .tc-widget { flex-direction: row; justify-content: flex-start; align-content: flex-start; flex-wrap: wrap; }

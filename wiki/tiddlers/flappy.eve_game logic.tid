@@ -1,6 +1,6 @@
 created: 20170618215426729
 creator: 0.0.0.0
-modified: 20170625120224543
+modified: 20170722214038475
 modifier: 0.0.0.0
 tags: flappy.eve
 title: flappy.eve/game logic
@@ -14,7 +14,7 @@ Now we need some logic to actually play the game. We slide obstacles along propo
 
 Every 2 distance a wild obstacle appears
 
-```
+```eve
 search
   [#world distance]
   obstacle = [#obstacle offset]
@@ -29,7 +29,7 @@ When the obstacle is offscreen (`x > 90`), we randomly adjust the height of its 
 
 Readjust the height of the gap every time the obstacle resets
 
-```
+```eve
 search
   [#time tick]
   [#world screen: "game" tick != tick]
@@ -44,7 +44,7 @@ commit
 
 When a player clicks during gameplay, we give the bird some lift by setting its velocity.
 
-```
+```eve
 search
   [#html/event/click]
   [#world screen: "game"]
@@ -58,7 +58,7 @@ commit
 
 Next, we scroll the world in time with frame updates. Eve is currently locked to 60fps updates here, but this will probably be configurable in the future. Importantly, we only want to update the world state once per frame, so to ensure that we note the offset of the frame we last computed in `world.frame` and ensure we’re not recomputing for the same offset.
 
-```
+```eve
 search
   [#time tick]
   world = [#world screen: "game" tick != tick gravity]
@@ -78,7 +78,7 @@ Checking collision with the ground is very simple. Since we know the y height of
 
 The game is lost if the player hits the ground.
 
-```
+```eve
 search
   world = [#world screen: "game"]
   [#player y > 85] // ground height + player radius
@@ -91,7 +91,7 @@ Collision with the pipes is only slightly harder. Since they come in pairs, we f
 
 The game is lost if the player hits an `#obstacle`
 
-```
+```eve
 search
   world = [#world screen: "game"]
   [#player x y]

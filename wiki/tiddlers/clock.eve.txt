@@ -2,7 +2,7 @@ This code is copied from the eve-starter project at [[clock.eve|https://github.c
 
 Create a timer that will tick once per second.
 
-```
+```eve
 commit
   [#time #system/timer resolution: 1000]
 
@@ -10,7 +10,7 @@ commit
 
 Draw an appropriately positioned line into `#clock-hand`s.
 
-```
+```eve
 search
   hand = [#clock-hand degrees length]
   x2 = 50 + (length * math/sin[degrees])
@@ -22,7 +22,7 @@ bind
 
 Draw a clock using SVG. We find the angle for each hand using time and let the `#clock-hand` block take care of the rest.
 
-```
+```eve
 search
   [#time hour minute second]
 

@@ -1,6 +1,6 @@
 created: 20170618214528899
 creator: 0.0.0.0
-modified: 20170625115636196
+modified: 20170722214205989
 modifier: 0.0.0.0
 tags: flappy.eve
 title: flappy.eve/setup
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 Add a flappy eve and a world for it to flap in:
 
-```
+```eve
 commit
   [#player #self name: "eve" x: 25 y: 50 velocity: 0]
   [#world screen: "menu" tick: 0 distance: 0 best: 0 gravity: -0.061]
@@ -24,7 +24,7 @@ Next we draw the backdrop of the world. The player and obstacle will be drawn la
 
 !! Draw the game world!
 
-```
+```eve
 search
   world = [#world]
 

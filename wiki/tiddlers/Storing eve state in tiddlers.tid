@@ -1,6 +1,6 @@
 created: 20170611114702146
 creator: 0.0.0.0
-modified: 20170623015418078
+modified: 20170722214625215
 modifier: 0.0.0.0
 tags: 
 title: Storing eve state in tiddlers
@@ -42,7 +42,7 @@ You can inspect the persisted data at [[test-eve-save]]
 
 The original counter.eve example generated the initial counters like this:
 
-```
+```eve
 search
   sort = math/range[start: 1 stop: 2]
 
@@ -53,7 +53,7 @@ commit
 
 In order to add support for storing the `#counter` records, I changed it to this:
 
-```
+```eve
 search
   sort = math/range[start: 1 stop: 2]
   not([#counter sort: s count: c])
