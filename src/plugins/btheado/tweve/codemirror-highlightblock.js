@@ -16,9 +16,9 @@ Wraps up the fenced code blocks parser for highlight and use in TiddlyWiki5
 
 var CodeBlockWidget = require("$:/core/modules/widgets/codeblock.js").codeblock;
 
-if($tw.browser) {
-  // TODO: Find a way to do this only if codemirror plugin is available. The way
-  // it is now, codemirror plugin is a hard requirement for tweve
+// Skip if the codemirror plugin is not loaded or if not running in browser
+var tiddler = $tw.wiki.getTiddler("$:/plugins/tiddlywiki/codemirror/lib/codemirror.js");
+if($tw.browser && tiddler) {
   var CodeMirror = require("$:/plugins/tiddlywiki/codemirror/lib/codemirror.js");
 
   // TODO: This will not play nice if user has highlightjs plugin loaded
