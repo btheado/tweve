@@ -1,6 +1,6 @@
 created: 20170630235042386
 creator: 0.0.0.0
-modified: 20170722211313184
+modified: 20170723231759903
 modifier: 0.0.0.0
 title: Codemirror and eve syntax highlighting
 type: text/x-gfm
@@ -9,17 +9,9 @@ Create a tiddler with `type=text/x-gfm` and in view mode, the github flavored ma
 
 With this standard Eve programs can be pasted in and they will be rednered nicely without having to change to the TiddlyWiki markup syntax.
 
-Details
+# Example markdown
 
-* TiddlyWiki has its own wiki syntax which is not generally compatible with markdown
-* TiddlyWiki has a [markdown plugin](http://tiddlywiki.com/plugins/tiddlywiki/markdown/) for rendering tiddlers as markdown if the type is set as text/x-markdown
-* TiddlyWiki has a [codemirror plugin](http://tiddlywiki.com/plugins/tiddlywiki/codemirror/) which can replace the text box used for editing tiddler body text
-* Codemirror supports syntax highlighting and an [eve mode](https://github.com/witheve/codemirror-mode-eve) has been written.
-* Typed code blocks (in which eve code can be syntax highlighted) are mainly only available in GFM (Github flavored markdown).
-* If the tiddler has `type=text/x-gfm`, then the nice eve syntax highlighting will be used in edit mode.
-* However, the markdown plugin will not be used for rendering `text/x-gfm` so in view mode, this tiddler will look bad. Even if it did render `text/x-gfm` it would not look good because the supported markdown flavors do not support the typed code blocks
-* As a solution for this, I created my own markdown wrapper using the https://markdown-it.github.io/ library which supports GFM.
-
+Eve code block:
 ```eve
 search
   a = 1
@@ -27,6 +19,7 @@ bind
   [#ui/div text: "hi"]
 ```
 
+Javascript code block
 ```javascript
 var foo = function (bar) {
   return bar++;

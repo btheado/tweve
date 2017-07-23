@@ -1,6 +1,6 @@
 created: 20170428225647467
 creator: 0.0.0.0
-modified: 20170630234937202
+modified: 20170723232737645
 modifier: 0.0.0.0
 tags: 
 title: Eve tiddlywiki plugin
@@ -28,13 +28,11 @@ This renders as
 
 Click the squares above to play. Open the [[tic-tac-toe.eve]] tiddler to view the source code.
 
-! Tiddlywiki widgets and Eve
+! Using the widget to execute Eve code
 
 Widgets in Tiddlywiki are a way to provide extended functionality beyond the wiki syntax and html markup. There are many core widgets included with Tiddlywiki by default and javascript code can be written to add new widgets. 
 
-Eve code has its own syntax. It also has a Javascript DSL which can be used to glue it together with other javascript projects. Here it is glued to Tiddlywiki by exposing a Tiddlywiki widget with the name ``eve``. This ``eve`` widget allows the Eve syntax to be rendered inside of Tiddlywiki.
-
-A program specified with the Eve syntax is a valid markdown document with the actual Eve code embedded inside the triple backtick sections. The Tiddlywiki [[wiki syntax|http://tiddlywiki.com/static/WikiText.html]] is partially based on markdown. The important part is the wiki syntax supports marking [[code blocks|http://tiddlywiki.com/static/Code%2520Blocks%2520in%2520WikiText.html]] with triple back ticks just like Eve. This means Eve code can be authored inside of Tiddlywiki tiddlers using the wiki syntax and it will look nice for reading. Then with the `eve` widget that same code can be executed.
+Eve code has its own syntax. It also has a Javascript DSL which can be used to glue it together with other javascript projects. Here it is glued to Tiddlywiki by exposing a Tiddlywiki widget with the name ``eve``. This ``eve`` widget allows the Eve syntax to be executed/rendered inside of Tiddlywiki.
 
 Eve code is passed into the widget using the ``markdown`` attribute.  Tiddlywiki widget [[attributes|http://tiddlywiki.com/static/Widgets%2520in%2520WikiText.html]] can be specified several ways. Two ways are described here.
 
@@ -69,14 +67,43 @@ This renders as:
 <$eve markdown={{hello.eve triple double quotes}}/>
 <<<
 
-! More features and examples
+This approach is recommended only for the smallest of Eve programs.
+
+!! Use the filter attribute to pull Eve code from multiple tiddlers
+
+[[flappy bird]] - shows how the `filter` attribute of the eve widget can be used to join multiple tiddlers together into a single Eve program. Editing a long program within a single tiddler can be unwieldy, so breaking them down into smaller chunks can be helpful.
+
+! Authoring Eve programs in Tiddlywiki
+
+A program specified with the Eve syntax is a valid markdown document with the actual Eve code embedded inside the triple backtick sections. The triple backtick delimiters are sometimes called ''code fences'' and they are used to delineate blocks of code.
+
+!! Using Tiddlywiki syntax
+
+The Tiddlywiki [[wiki syntax|http://tiddlywiki.com/static/WikiText.html]], though different from markdown, uses the same code fence syntax to mark code blocks. This means the Tiddlywiki syntax can work just fine to specify Eve programs.
+
+To create a new Eve program using the Tiddlywiki syntax, click the {{$:/core/ui/Buttons/new-tiddler}} icon and begin composing your code.
+
+!! Using markdown syntax
+
+Tiddlywiki has a [[markdown plugin|http://tiddlywiki.com/plugins/tiddlywiki/markdown/]] for rendering tiddlers as markdown if the type is set as `text/x-markdown`. However it uses a markdown library which does not support the all-important code fence syntax. Therefore, I've written my own [[plugin|$:/plugins/btheado/markdown]] which wraps a markdown library that does support the code fence syntax.
+
+To create a new Eve program using the Markdown syntax, click the {{$:/plugins/btheado/markdown/new-markdown-button}} icon and begin composing your code. As an alternative, you can use the {{$:/core/ui/Buttons/new-tiddler}} icon and set the type to `text/x-gfm` (gfm for github-flavored markdown).
+
+A few advantages to using the markdown syntax:
+
+#If the [[codemirror plugin|http://tiddlywiki.com/plugins/tiddlywiki/codemirror/]] is loaded and configured correctly, the editor will have colored syntax highlighting for both the markdown and the Eve code.
+#If you find a random Eve program on the web it will likely be in markdown format. If you paste such a program into a markdown tiddler, then it will render much nicer than if you paste it into a Tiddlywiki tiddler. If all you want to do is execute the code, then this will not matter. But if you also want to read the code, it will.
+
+Note that the widget syntax will not work in a markdown tiddler. In order to actually invoke a program using the `eve` widget, a normal tiddler is needed.
+
+! Features and examples
 
 * ''Persistence'' - Eve records tagged with the `#persist` will automatically be stored in tiddler fields as they change. Upon widget refresh, the fields will be loaded back into the eve program. See [[Storing eve state in tiddlers]] for details and a demo
 * ''SVG'' - [[svg clock]]
 *  ''Canvas'' - [[canvas demo]]
-* ''Split single Eve program across multiple tiddlers'' - [[flappy bird]] - shows how the `filter` attribute of the eve widget can be used to join multiple tiddlers together into a single Eve program. Editing a long program within a single tiddler can be unwieldy, so breaking them down into smaller chunks can be helpful.
+* [[flappy bird]]
 * [[Eve syntax error examples]]
-* [[Codemirror and eve syntax highlighting]] - work in progress
+* [[Codemirror and eve syntax highlighting]]
 
 ! Eve widget reference
 
