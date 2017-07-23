@@ -1,10 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var CodeMirror = require("../../lib/codemirror");
-if (!CodeMirror["defineSimpleMode"])
-    throw new Error("Please ensure that the simple-mode addon is loaded prior to eve-mode.");
-if (!CodeMirror.modes["gfm"])
-    console.warn("Codemirror eve mode was designed to be embedded within gfm mode. Please ensure gfm mode is loaded prior to eve-mode.");
+//require("codemirror/addon/mode/simple");
+// Optional but recommended if authoring Eve documents rather than individual blocks.
+// import "codemirror/addon/mode/overlay";
+// import "codemirror/addon/mode/multiplex";
+// import "codemirror/mode/gfm/gfm";
+// import "codemirror/mode/markdown/markdown";
+// import "codemirror/mode/javascript/javascript";
 // Just some type silliness to tell TS to preserve the static keys but type their values as Patterns.
 function asPatterns(patterns) {
     return patterns;
@@ -15,13 +18,14 @@ var patterns = asPatterns({
         regex: /search/,
         token: "keyword.section.search",
         indent: true,
-        next: "search",
+        push: "search",
     },
     start_action: {
         regex: /(bind|commit)/,
         token: "keyword.section.action",
         indent: true,
-        next: "action"
+        dedent: true,
+        push: "action"
     },
     start_record: {
         regex: /\[/,
@@ -49,7 +53,7 @@ var patterns = asPatterns({
     },
     stop_not: {
         regex: /\)/,
-        token: "syntax",
+        token: "syntax.end-not",
         dedent: true,
         pop: true,
     },
@@ -58,10 +62,9 @@ var patterns = asPatterns({
     string_inner: { regex: /(?:[^"\\{]|\\.)+/, token: "literal.string" },
     start_interpolation: { regex: /(?:(?!\\)){{/, token: "syntax", push: "interpolation" },
     stop_interpolation: { regex: /(?:(?!\\))}}/, token: "syntax", pop: true },
-    if_then_else: {
-        regex: /if|then|else/,
-        token: "keyword.if"
-    },
+    if: { regex: /if|else if/, token: "keyword.if", indent: true },
+    then: { regex: /then/, token: "keyword.if", dedent: true },
+    else: { regex: /else/, token: "keyword.if" },
     number: { regex: /[-+]?(?:\.\d+|\d+\.?\d*)/, token: "literal.number" },
     comment: { regex: /\/\/.*/, token: "comment" },
     identifier: { regex: _identifierPattern, token: "identifier" },
@@ -69,7 +72,7 @@ var patterns = asPatterns({
     infix: { regex: /-|\+|\/|\*/, token: "operator.infix" },
     filter: { regex: /<|<=|>|>=|!=/, token: "operator.filter" },
     update: { regex: /\+=|-=|:=|<-/, token: "operator.update" },
-    misc_syntax: { regex: /[:.]/, token: "syntax" }
+    misc_syntax: { regex: /[:.,]/, token: "syntax.misc" }
 });
 function compose() {
     var states = [];
@@ -90,9 +93,14 @@ var expr = [
     patterns.identifier,
     patterns.number
 ];
+var union_or_choose = [
+    patterns.if,
+    patterns.then,
+    patterns.else
+];
 var mode = CodeMirror.defineSimpleMode("eve", {
     meta: {
-        dontIndentStates: ["comment"],
+        //dontIndentStates: ["comment"],
         lineComment: "//"
     },
     start: [
@@ -110,10 +118,11 @@ var mode = CodeMirror.defineSimpleMode("eve", {
     ], expr),
     search: compose([
         patterns.comment,
+        patterns.tag,
         patterns.start_action,
         patterns.start_record,
         patterns.start_not,
-        patterns.if_then_else,
+    ], union_or_choose, [
         patterns.filter,
         patterns.misc_syntax
     ], expr),
@@ -127,7 +136,13 @@ var mode = CodeMirror.defineSimpleMode("eve", {
     action: compose([
         patterns.comment,
         patterns.start_record,
+        // @FIXME: begin hack for whitespace syntax
+        patterns.start_search,
+        patterns.start_action,
+        patterns.filter,
+        // @FIXME: end hack for whitespace syntax
         patterns.update,
+        patterns.tag,
         patterns.misc_syntax
     ], expr),
     string: [
