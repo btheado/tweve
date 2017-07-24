@@ -1,16 +1,16 @@
 created: 20170618215426729
 creator: 0.0.0.0
-modified: 20170722214038475
+modified: 20170723235457282
 modifier: 0.0.0.0
 tags: flappy.eve
 title: flappy.eve/game logic
-type: text/vnd.tiddlywiki
+type: text/x-gfm
 
-! Game Logic
+# Game Logic
 
 Now we need some logic to actually play the game. We slide obstacles along proportional to the distance travelled, and wrap them around to the beginning once they're entirely off screen. Additionally, we only show obstacles once their distance travelled is positive. This allows us to offset a pipe in the future, without the modulo operator wrapping it around to start off halfway through the screen.
 
-!! Obstacles
+## Obstacles
 
 Every 2 distance a wild obstacle appears
 
@@ -40,7 +40,7 @@ commit
   obstacle.height := height
 ```
 
-!! Flapping the player
+## Flapping the player
 
 When a player clicks during gameplay, we give the bird some lift by setting its velocity.
 
@@ -54,7 +54,7 @@ commit
   player.velocity := 1.17
 ```
 
-!! Scroll the world
+## Scroll the world
 
 Next, we scroll the world in time with frame updates. Eve is currently locked to 60fps updates here, but this will probably be configurable in the future. Importantly, we only want to update the world state once per frame, so to ensure that we note the offset of the frame we last computed in `world.frame` and ensure we’re not recomputing for the same offset.
 
@@ -72,7 +72,7 @@ commit
   player.velocity := velocity + gravity
 ```
 
-!! Collision
+## Collision
 
 Checking collision with the ground is very simple. Since we know the y height of the ground, we just check if the player's bottom (determined by center + radius) is below that point.
 

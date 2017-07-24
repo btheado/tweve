@@ -1,12 +1,12 @@
 created: 20170618214528899
 creator: 0.0.0.0
-modified: 20170722214205989
+modified: 20170723235805113
 modifier: 0.0.0.0
 tags: flappy.eve
 title: flappy.eve/setup
-type: text/vnd.tiddlywiki
+type: text/x-gfm
 
-! Setup
+# Setup
 
 Add a flappy eve and a world for it to flap in:
 
@@ -20,9 +20,9 @@ commit
   [#time #system/timer resolution: 16.66666666667]
 ```
 
-Next we draw the backdrop of the world. The player and obstacle will be drawn later based on their current state. Throughout the app we use resources from [[@bhauman's flappy bird demo in clojure|https://github.com/bhauman/flappy-bird-demo]]. Since none of these things change over time, we commit them once when the player starts the game.
+Next we draw the backdrop of the world. The player and obstacle will be drawn later based on their current state. Throughout the app we use resources from [@bhauman's flappy bird demo in clojure](https://github.com/bhauman/flappy-bird-demo). Since none of these things change over time, we commit them once when the player starts the game.
 
-!! Draw the game world!
+## Draw the game world!
 
 ```eve
 search

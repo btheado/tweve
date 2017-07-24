@@ -1,14 +1,14 @@
 created: 20170604124615774
 creator: 0.0.0.0
-modified: 20170722213615743
+modified: 20170723234846296
 modifier: 0.0.0.0
 tags: 
 title: counter.eve
-type: text/vnd.tiddlywiki
+type: text/x-gfm
 
-! Counter
+# Counter
 
-Based on the eve program at http://play.witheve.com/#/examples/counter.eve. Modified to use Tiddlywiki markup instead of the markdown. Also modified to support embedding.
+Based on the eve program at [http://play.witheve.com/#/examples/counter.eve](http://play.witheve.com/#/examples/counter.eve). Modified to support embedding.
 
 This program demonstrates:
 
@@ -17,7 +17,7 @@ This program demonstrates:
 * reusing elements programatically
 * extending an element
 
-!!! Increment a Counter
+### Increment a Counter
 
 Each button uses the referenced counter to increment itself. We need to think about two tags to accomplish this goal:
 
@@ -32,11 +32,11 @@ commit
   counter.count := counter.count + diff
 ```
 
-!!! Build a Counter
+### Build a Counter
 
 For every `#counter`, we create a `#ui/row` that contains the elements that draw the counter. These rows are added automatically to the root of the DOM, but you could add them to a particular element instead adding them as children to the parent's record.
 
-There is an "issue" with Eve which causes html events to be sent to all Eve program instances. See https://github.com/witheve/Eve/issues/844 for further discussion. Using the `#program` is one of the workarounds proposed there. It is only needed for tweve since multiple instances of the same program are being instantiated here. For a standalone eve program, it would not be necessary.
+There is an *issue* with Eve which causes html events to be sent to all Eve program instances. See [https://github.com/witheve/Eve/issues/844](https://github.com/witheve/Eve/issues/844) for further discussion. Using the `#program` is one of the workarounds proposed there. It is only needed for tweve since multiple instances of the same program are being instantiated here. For a standalone eve program, it would not be necessary.
 
 ```eve
 search
@@ -62,7 +62,7 @@ commit
   [#counter #persist #fancy sort: 5 count: 0]
 ```
 
-!!! Extend the Counter
+### Extend the Counter
 
 This block says: "For every rows with a counter that is tagged fancy, add a style with a black background and pink text". Let's break it down. We search for all `#ui/row`s with a counter attribute. The counter is constrained to be only counters with a `#fancy` tag. Then we bind a new style to each.
 

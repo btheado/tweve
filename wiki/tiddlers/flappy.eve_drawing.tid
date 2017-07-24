@@ -1,14 +1,14 @@
 created: 20170618215214944
 creator: 0.0.0.0
-modified: 20170722213730750
+modified: 20170723235355651
 modifier: 0.0.0.0
 tags: flappy.eve
 title: flappy.eve/drawing
-type: text/vnd.tiddlywiki
+type: text/x-gfm
 
-! Drawing
+# Drawing
 
-!! Player
+## Player
 
 Next we draw the `#player` at its (x,y) coordinates. Since the player is stationary in x, setting his x position here dynamically is just a formality, but it allows us to configure his position on the screen when we initialize. We create the sprite first, then set the x and y positions to let us reuse the same element regardless of where the player is.
 
@@ -26,7 +26,7 @@ bind
   svg.children += sprite
 ```
 
-!! Obstacles
+## Obstacles
 
 Drawing obstacles is much the same process as drawing the player, but we encapsulate the sprites into a nested SVG to group and move them as a unit.
 

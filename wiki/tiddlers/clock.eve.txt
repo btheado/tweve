@@ -1,4 +1,4 @@
-This code is copied from the eve-starter project at [[clock.eve|https://github.com/witheve/eve-starter/blob/master/programs/clock.eve]]
+This code is copied from the eve-starter project at [clock.eve](https://github.com/witheve/eve-starter/blob/master/programs/clock.eve)
 
 Create a timer that will tick once per second.
 

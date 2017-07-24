@@ -1,12 +1,12 @@
 created: 20170618214835230
 creator: 0.0.0.0
-modified: 20170722214140250
+modified: 20170723235659259
 modifier: 0.0.0.0
 tags: flappy.eve
 title: flappy.eve/game menus
-type: text/vnd.tiddlywiki
+type: text/x-gfm
 
-! Game menus
+# Game menus
 
 These following blocks handle drawing the game's other screens (such as the main menu and the game over scene).
 
@@ -35,7 +35,7 @@ bind
   svg.children += [#svg/text x: 50 y: 85 text-anchor: "middle" font-size: 4 text: "Click to play again!" sort: 10]
 ```
 
-!! Score calculation
+## Score calculation
 
 We haven't calculated the score yet, so let's do that. We calculate the score as the `floor` of the distance, meaning we just round the distance down to the nearest integer. If the distance between pipes is changed, this value can be scaled to search.
 
@@ -47,7 +47,7 @@ bind
   world.score := math/floor[value: distance]
 ```
 
-!! Start a new game
+## Start a new game
 
 When the game is on the "menu" or "game over" screens, a click anywhere in the application will (re)start the game. Additionally, if the current score is better than the current best, we'll swap them out now. Along with starting the game, we make sure to reset the distance and player positions in the came of a restart.
 
